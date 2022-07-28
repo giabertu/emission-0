@@ -4,17 +4,17 @@ import { Link, useNavigate } from 'react-router-dom';
 
 
 //Make sure to pass down strings without appending '/'. 
-function CalcNavButtons(props: {back?: string, next: string, exit?: string, data?: any}) {
-  const {back, next, exit, data} = props;
+function CalcNavButtons(props: {start?: boolean, back?: string, next?: string, exit?: string, setCurrent?: any}) {
+  const {back, next, exit, setCurrent, start} = props;
 
   const navigate = useNavigate();
 
-  const handleBack = () => {
-    navigate(`${back}`);
-  }
-  // const handleNext = () => {
-  //    navigate(`${next}`);
+  // const handleBack = () => {
+  //   navigate(`${back}`);
   // }
+  const handleNext = () => {
+     navigate(`${next}`);
+  }
   const handleExit = () => {
     navigate(`${exit}`)
   }
@@ -27,12 +27,15 @@ function CalcNavButtons(props: {back?: string, next: string, exit?: string, data
         <Link to={exit}>
           <button onClick={handleExit}>Exit</button>
         </Link> : 
-        <Link to={back!} state={{data}}>
-          <button onClick={handleBack}>Back</button>
-        </Link>}
-        <Link to={next} state={{data}}>
-          <button /* onClick={handleNext} */>Next</button>
-        </Link>
+          <button onClick={() => setCurrent((prev: number) => {
+            return prev-1;
+          })}>Back</button>}
+          {start ? 
+            <button onClick={handleNext}>Begin</button> :
+            <button onClick={() => setCurrent((prev: number) => {
+              return prev+1;
+            })}>Next</button>
+          }
       </div>
   )
 }

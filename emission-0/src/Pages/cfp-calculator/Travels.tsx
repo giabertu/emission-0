@@ -8,13 +8,13 @@ import Service from '../../utils/Service'
 
 let id = 0;
 
-function Travels() {
+function Travels(props: {setCurrent?: any}) {
   const [inputArray, setInputArray] = useState<FlightInfo[]>([])
 
   // const location: any = useLocation();
   // //Properties of diet: dietChoice, coffeeDrinker, consumption (line 42: Diet.tsx)
   // const diet = location.state?.data.diet;
-
+  const {setCurrent} = props;
 
   const handleAddFlight = () => {
     setInputArray(inputArray.concat([{from: '', to: '', id,  del: false}]))
@@ -56,7 +56,7 @@ function Travels() {
         <AirportInput key={flightInfo.id} handleRemoveFlight={handleRemoveFlight} flightInfo={flightInfo} handleInputSelect={handleInputSelect}/>
         ) : null}
         <h3>{Service.diet}</h3>
-      <CalcNavButtons back={'/diet'} next={'/electricity'} />
+      <CalcNavButtons back={'/diet'} next={'/electricity'} setCurrent={setCurrent} />
     </div>
   )
 }

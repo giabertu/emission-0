@@ -3,10 +3,10 @@ import { useLocation } from 'react-router-dom';
 import CalcNavButtons from '../../components/CalcNavButtons'
 import HouseholdButtons from '../../components/Electricity/HouseholdButtons'
 
-function Electricity() {
+function Electricity(props: {setCurrent?: any}) {
 
   const [bedrooms, setBedrooms] = useState<number>(0);
-  
+  const {setCurrent} = props;
 
   const handleHouseholdButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log(e.currentTarget.innerText)
@@ -18,7 +18,7 @@ function Electricity() {
       <h1>Electricity</h1>
       <h2>How many bedrooms does your house have?</h2>
       <HouseholdButtons handleHouseholdButton={handleHouseholdButton}/>
-      <CalcNavButtons back={'/travels'} next={'/'} />
+      <CalcNavButtons back={'/travels'} next={'/'} setCurrent={setCurrent} />
     </div>
   )
 }
