@@ -5,6 +5,8 @@ import {Routes, Route, useNavigate, BrowserRouter as Router} from 'react-router-
 import { Calculator } from './Pages/cfp-calculator/Calculator';
 import Homepage from './Pages/Homepage';
 import Diet from './Pages/cfp-calculator/Diet';
+import Travels from './Pages/cfp-calculator/Travels';
+import Electricity from './Pages/cfp-calculator/Electricity';
 
 function App() {
  
@@ -21,6 +23,14 @@ function App() {
           <Route
             path="/diet"
             element={<Diet />}
+          />
+          <Route
+            path="/travels"
+            element={<Travels />}
+          />
+          <Route
+            path="/electricity"
+            element={<Electricity />}
           />
         </Routes>
     </Router>
