@@ -9,26 +9,11 @@ const options = [
   ...data
 ];
 
-const AirportInput = (props: {handleRemoveFlight: any, flightInfo: FlightInfo, handleInputSelect: any}) => {
+function AirportInput (props: {handleRemoveFlight: any, flightInfo: FlightInfo, handleInputSelect: any}) {
 
   const {handleRemoveFlight, handleInputSelect, flightInfo} = props;
   const [valueFrom, setValueFrom] = useState('');
-  // const [valueTo, setValueTo] = useState('');
-
-  // const handleSelect = (component: string, value: string) => {
-  //   if (component == 'from') {
-  //     flightInfo.from = value;
-  //     // setValueFrom(value);
-  //   } else {
-  //     flightInfo.to = value;
-  //     // setValueTo(value);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   setValueFrom(flightInfo.from)
-  //   setValueTo(flightInfo.to)
-  // }, [])
+  
   console.log(flightInfo)
   return (
     <div className='AirportInput'>

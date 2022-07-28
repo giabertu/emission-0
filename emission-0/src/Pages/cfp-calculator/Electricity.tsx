@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
+import { useLocation } from 'react-router-dom';
 import CalcNavButtons from '../../components/CalcNavButtons'
 import HouseholdButtons from '../../components/Electricity/HouseholdButtons'
 
 function Electricity() {
 
   const [bedrooms, setBedrooms] = useState<number>(0);
+  
 
   const handleHouseholdButton = (e: React.MouseEvent<HTMLButtonElement>) => {
     console.log(e.currentTarget.innerText)

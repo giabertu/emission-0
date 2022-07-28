@@ -1,31 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Diet.css'
-import { useNavigate } from 'react-router-dom';
 import DietButtons from '../../components/Diet/DietButtons';
 import ConsumptionInput from '../../components/Diet/ConsumptionInput';
 import { Checkbox } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
-import InputNumberChangeEvent from 'antd/es/input-number'
 import CalcNavButtons from '../../components/CalcNavButtons';
+import Carbon from '../../utils/Service';
 
 function Diet() {
-  const navigate = useNavigate()
   const [dietChoice, setDietChoice] = useState('')
-  const [coffeDrinker, setCoffeDrinker] = useState(false)
-  //add consumption state
-  const [consumption, setConsumption] = useState(100)
-
-
+  const [coffeeDrinker, setCoffeDrinker] = useState(false)
+  const [consumption, setConsumption] = useState(100);
+  const [carbon, setCarbon] = useState(0)
+  
+  // const [carbonFootprint, setCarbonFootprint] = useState(0);
+  
   const handleDietChoice = (e: React.ChangeEvent<HTMLInputElement>) => {
     //set diet choice to either 'Omnivore, Vegetarian or Vegan'
     setDietChoice(e.target.value);
+    setCarbon(Carbon.calcDietFooprint({dietChoice, coffeeDrinker, consumption}))
   }
   const handleCheckbox = (e:  CheckboxChangeEvent) => {
-    setCoffeDrinker(!coffeDrinker);
+    setCoffeDrinker(!coffeeDrinker);
+    setCarbon(Carbon.calcDietFooprint({dietChoice, coffeeDrinker, consumption}))
   }
   const handleConsumption = (value: number) => {
     setConsumption(value);
+    setCarbon(Carbon.calcDietFooprint({dietChoice, coffeeDrinker, consumption}))
   }
+
+  useEffect(() => {
+    setCarbon(Carbon.calcDietFooprint({dietChoice, coffeeDrinker, consumption}));
+  })
 
   return (
     <div className='Diet'>
@@ -34,7 +40,9 @@ function Diet() {
       <DietButtons handleDietChoice={handleDietChoice} /> 
       <Checkbox onChange={handleCheckbox}>I drink coffee regularly</Checkbox>
       <ConsumptionInput handleConsumption={handleConsumption} dietChoice={dietChoice}/>
-      <CalcNavButtons back={'/cfp-calculator'} next={'/travels'} />
+      <h3>Current yearly footprint: {Carbon.diet} kg</h3>
+      <CalcNavButtons back={'/cfp-calculator'} next={'/travels'} 
+      data={{diet: {dietChoice, coffeeDrinker, consumption}}}/>
     </div>
   )
 }

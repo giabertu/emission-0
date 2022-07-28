@@ -1,14 +1,19 @@
 import { Hash } from 'crypto'
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import CalcNavButtons from '../../components/CalcNavButtons'
 import AirportInput from '../../components/Travels/AirportInput'
 import {FlightInfo} from '../../components/Travels/FlightInfo'
-
+import Service from '../../utils/Service'
 
 let id = 0;
 
 function Travels() {
   const [inputArray, setInputArray] = useState<FlightInfo[]>([])
+
+  // const location: any = useLocation();
+  // //Properties of diet: dietChoice, coffeeDrinker, consumption (line 42: Diet.tsx)
+  // const diet = location.state?.data.diet;
 
 
   const handleAddFlight = () => {
@@ -25,21 +30,16 @@ function Travels() {
   }
 
   const handleInputSelect = (component: string, value: string, flightInfo: FlightInfo) => {
-    console.log('Here is the flightInfo ', flightInfo)
       const newArr: any = inputArray.map((input: FlightInfo, index) => {
-        console.log('Here is the element of the array: ', input)
         if (input.id == flightInfo.id) {
           if (component == 'from') {
-            console.log('Setting from')
             input.from = value;
           } else {
-            console.log('Setting to')
             input.to = value;
           }
         }
         return input;
       })
-      console.log('Here is the new array ', newArr)
       setInputArray(newArr);
   }
 
@@ -55,6 +55,7 @@ function Travels() {
       {inputArray.length > 0 ? inputArray.map((flightInfo, index) => 
         <AirportInput key={flightInfo.id} handleRemoveFlight={handleRemoveFlight} flightInfo={flightInfo} handleInputSelect={handleInputSelect}/>
         ) : null}
+        <h3>{Service.diet}</h3>
       <CalcNavButtons back={'/diet'} next={'/electricity'} />
     </div>
   )

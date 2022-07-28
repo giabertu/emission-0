@@ -1,20 +1,20 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
 //Make sure to pass down strings without appending '/'. 
-function CalcNavButtons(props: {back?: string, next: string, exit?: string}) {
-  const {back, next, exit} = props;
+function CalcNavButtons(props: {back?: string, next: string, exit?: string, data?: any}) {
+  const {back, next, exit, data} = props;
 
   const navigate = useNavigate();
 
   const handleBack = () => {
     navigate(`${back}`);
   }
-  const handleNext = () => {
-     navigate(`${next}`);
-  }
+  // const handleNext = () => {
+  //    navigate(`${next}`);
+  // }
   const handleExit = () => {
     navigate(`${exit}`)
   }
@@ -23,8 +23,16 @@ function CalcNavButtons(props: {back?: string, next: string, exit?: string}) {
 
   return (
     <div className='navigation-btns'>
-        {exit ? <button onClick={handleExit}>Exit</button> : <button onClick={handleBack}>Back</button>}
-        <button onClick={handleNext}>Next</button>
+        {exit ? 
+        <Link to={exit}>
+          <button onClick={handleExit}>Exit</button>
+        </Link> : 
+        <Link to={back!} state={{data}}>
+          <button onClick={handleBack}>Back</button>
+        </Link>}
+        <Link to={next} state={{data}}>
+          <button /* onClick={handleNext} */>Next</button>
+        </Link>
       </div>
   )
 }
