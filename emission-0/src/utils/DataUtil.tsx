@@ -14,11 +14,14 @@ export class DataUtil {
   }
 
   static getCountries () {
-    return countries.map(obj=> {
+    const newArr = countries.filter(obj => {
+      if (obj.region === 'Europe' || obj.region == 'Americas')
+        return true;
+    });
+    return newArr.map(obj=> {
       return {value: obj.name, code: obj['alpha-2']}
     })
   }
-
 }
 
 

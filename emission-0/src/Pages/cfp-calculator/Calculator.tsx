@@ -2,9 +2,9 @@
 // import { useNavigate } from "react-router-dom"
 // import CalcNavButtons from "../../components/CalcNavButtons";
 import React, { useEffect, useState } from "react"
-import Diet from "./Diet";
-import Electricity from "./Electricity";
-import Travels from "./Travels";
+import Diet from "../../components/Diet/Diet"
+import Travels from "../../components/Travels/Travels"
+import Electricity from "../../components/Electricity/Electricity"
 import { Tabs, TabList, TabPanels, Tab, TabPanel, ChakraProvider } from '@chakra-ui/react'
 import './Calculator.css'
 import {Carbon} from '../../utils/Carbon'
@@ -12,6 +12,9 @@ import { CheckboxChangeEvent } from "antd/lib/checkbox";
 import { FlightInfo } from "../../utils/FlightInfo";
 import {ApiService} from '../../utils/ApiService'
 import uniqid from 'uniqid'
+import { isNamedExports } from "typescript";
+import { Button } from "antd";
+import { Link } from "react-router-dom";
 
 
 //Unique id for new FlightInfo objects (updated at line 44)
@@ -79,7 +82,14 @@ export function Calculator() {
     setCountry(option.code);
   }
 
-  /*********************************************/
+  /***********DONE BUTTON STATE LOGIC*********/
+  const [showDone, setShowDone] = useState<boolean>(false)
+
+  function handleTabChange (index: number) {
+    if (index === 2) {
+      setShowDone(true);
+    }
+  }
 
   //HELPER FUNCTION
   function calcAndSetFootprint() {
@@ -98,7 +108,7 @@ export function Calculator() {
       if (estimate){
         const {carbon_kg} = estimate.data.attributes;
         console.log(carbon_kg)
-        Carbon.calcTravelsFootprint(carbon_kg);
+        Carbon.calcTravelsFootprint(Math.floor(carbon_kg));
         calcAndSetFootprint();
       }
     })(); 
@@ -120,8 +130,7 @@ export function Calculator() {
   
   return (
     <>
-    <Tabs variant='soft-rounded' colorScheme='blue'>
-
+    <Tabs variant='soft-rounded' colorScheme='blue' onChange={(index) => handleTabChange(index)}>
         <TabList>
           <Tab className="tab">Diet</Tab>
           <Tab className="tab">Travels</Tab>
@@ -144,6 +153,9 @@ export function Calculator() {
       </TabPanels>
     </Tabs>
     <h2>Current Carbon Footprint: {totalFootprint}</h2>
+    <Link to={'/'} state={{totalFootprint}}>
+      {showDone ? <Button type="primary" shape="round" size={'large'}>Done</Button> : null}
+    </Link>
     </>
   )
 }

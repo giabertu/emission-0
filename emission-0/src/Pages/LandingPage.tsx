@@ -1,21 +1,25 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import Homepage from './Homepage';
+import Offset from './Offset';
 
-function Homepage() {
-  const navigate = useNavigate()
+function LandingPage() {
+
   const location = useLocation();
 
   //Logic to pass carbon footprint calculation to homepage.
   const data: {totalFootprint: number} = location.state as {totalFootprint: number};
   console.log(data.totalFootprint);
-
+  const footprint = data.totalFootprint;
 
   return (
-    <div className='Homepage'>
-      <h1>Homepage</h1>
-      <button onClick={() => {navigate('/cfp-calculator')}}>Start</button>
-    </div>
+    <>
+    { footprint  ?
+      <Offset footprint={footprint}/> :
+      <Homepage/>
+    }    
+    </>
   )
 }
 
-export default Homepage
+export default LandingPage

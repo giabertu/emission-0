@@ -1,7 +1,21 @@
 import { FlightInfo } from "./FlightInfo";
 
+
+//Table of contents:
+//1. Carbon Interface
+//  1. Travels Api call
+//  2. Electricity Api call
+//2. CO2 Offset API
+//  1. Price call 
+//  2. Compensate call
+
+
+
 export class ApiService {
 
+  constructor() {}
+  
+  /*********CARBON INTERFACE CLASS MEMBERS ********/
   static CARB_INT_URL: string = 'https://www.carboninterface.com/api/v1';
   static API_KEY: string = 'E9Q2sW86qRep6bbcc4pCA';
   static HEADERS_CONFIG = {
@@ -9,9 +23,7 @@ export class ApiService {
     'Content-Type' : 'application/json',
   }
 
-  constructor() {}
-
-  /***********TRAVELS API CALLS **********/
+  /***TRAVELS API CALL ***/
   static async postFlightInfo(flightsArray: FlightInfo[]) {
     const {proceed, legsArray} = ApiService.getLegsArray(flightsArray)
     if (proceed) {
@@ -30,8 +42,7 @@ export class ApiService {
       return estimate;
     }
   }
-
-  /***********ELECTRICITY API CALLS **********/
+  /***ELECTRICITY API CALL ***/
   static async postElectricity(electricityInfo: {bedrooms: number, country: string}) {
     const {bedrooms, country} = electricityInfo;
 
