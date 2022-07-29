@@ -7,7 +7,7 @@ import Electricity from "./Electricity";
 import Travels from "./Travels";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, ChakraProvider } from '@chakra-ui/react'
 import './Calculator.css'
-import {Service} from '../../utils/Service'
+import {Carbon} from '../../utils/Carbon'
 import { CheckboxChangeEvent } from "antd/lib/checkbox";
 import { FlightInfo } from "../../components/Travels/FlightInfo";
 
@@ -68,10 +68,10 @@ export function Calculator() {
 
   //HELPER FUNCTION
   function calcAndSetFootprint() {
-    Service.calcDietFooprint({dietChoice, coffeeDrinker, consumption});
-    Service.calcTravelsFootprint();
-    Service.calcElectricityFootprint();
-    setTotalFootprint(Service.calcTotalFootprint()); 
+    Carbon.calcDietFooprint({dietChoice, coffeeDrinker, consumption});
+    Carbon.calcTravelsFootprint();
+    Carbon.calcElectricityFootprint();
+    setTotalFootprint(Carbon.calcTotalFootprint()); 
   }
   
   //Everytime state changes, recaulculate footprint

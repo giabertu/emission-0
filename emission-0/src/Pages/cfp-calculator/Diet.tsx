@@ -5,14 +5,14 @@ import ConsumptionInput from '../../components/Diet/ConsumptionInput';
 import { Checkbox } from 'antd';
 import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 import CalcNavButtons from '../../components/CalcNavButtons';
-import {Service} from '../../utils/Service';
+import {Carbon} from '../../utils/Carbon';
 
 function Diet(props: {handleDietChoice: any, handleCheckbox: any, handleConsumption: any, dietChoice: any}) {
 
   const {handleDietChoice, handleCheckbox, handleConsumption, dietChoice} = props;
 
   useEffect(() => {
-    // setCarbon(Service.calcDietFooprint({dietChoice, coffeeDrinker, consumption}));
+    // setCarbon(Carbon.calcDietFooprint({dietChoice, coffeeDrinker, consumption}));
   })
 
   return (

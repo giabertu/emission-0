@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 import CalcNavButtons from '../../components/CalcNavButtons'
 import AirportInput from '../../components/Travels/AirportInput'
 import {FlightInfo} from '../../components/Travels/FlightInfo'
-import {Service} from '../../utils/Service'
+import {Carbon} from '../../utils/Carbon'
 import { Button, ButtonGroup } from '@chakra-ui/react'
 
 let id = 0;
@@ -22,7 +22,7 @@ function Travels(props: {handleAddFlight: any, handleRemoveFlight: any, handleIn
       {inputArray.length > 0 ? inputArray.map((flightInfo: FlightInfo) => 
         <AirportInput key={flightInfo.id} handleRemoveFlight={handleRemoveFlight} flightInfo={flightInfo} handleInputSelect={handleInputSelect}/>
         ) : null}
-        <h3>{Service.diet}</h3>
+        <h3>{Carbon.diet}</h3>
       {/* <CalcNavButtons back={'/diet'} next={'/electricity'} setCurrent={setCurrent} /> */}
     </div>
   )

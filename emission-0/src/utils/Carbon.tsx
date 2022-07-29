@@ -1,5 +1,5 @@
 
-export class Service {
+export class Carbon {
   static diet: number = 0;
   static travels: number = 0;
   static electricity: number = 0;
@@ -44,8 +44,8 @@ export class Service {
       const coffeeCarbonFootprint = yearlyCoffeeConsumptionKg * 17;
       yearlyCarbonFootprintKg += coffeeCarbonFootprint;
     }
-    Service.diet = Math.floor(yearlyCarbonFootprintKg);
-    return Service.diet;
+    Carbon.diet = Math.floor(yearlyCarbonFootprintKg);
+    return Carbon.diet;
 
   }
 
@@ -58,7 +58,7 @@ export class Service {
   }
 
   static calcTotalFootprint() {
-    return Service.electricity + Service.diet + Service.travels;
+    return Carbon.electricity + Carbon.diet + Carbon.travels;
   }
 
 }
