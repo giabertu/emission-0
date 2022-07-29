@@ -53,8 +53,9 @@ export class Carbon {
     return Carbon.travels;
   }
 
-  static calcElectricityFootprint(bedrooms: number) {
-    
+  static calcElectricityFootprint(carbon_kg: number) {
+    Carbon.electricity = carbon_kg;
+    return Carbon.electricity;
   }
 
   static calcTotalFootprint() {

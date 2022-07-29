@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
+import CountryInput from '../../components/Electricity/CountryInput';
 import HouseholdButtons from '../../components/Electricity/HouseholdButtons'
 
-function Electricity(props: {handleHouseholdButton: any}) {
+function Electricity(props: {handleHouseholdButton: any, handleCountryInput: any}) {
 
-  const {handleHouseholdButton} = props;
+  const {handleHouseholdButton, handleCountryInput} = props;
 
   return (
     <div>
       <h1>Electricity</h1>
+      <h2>In which country do you live in?</h2>
+      <CountryInput handleCountryInput={handleCountryInput}/>
       <h2>How many bedrooms does the house you live in have?</h2>
       <HouseholdButtons handleHouseholdButton={handleHouseholdButton}/>
     </div>

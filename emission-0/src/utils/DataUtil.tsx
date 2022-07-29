@@ -1,16 +1,24 @@
-import data from './airports.json'
+import airports from '../data/airports.json'
+import countries from '../data/countries.json'
 
-export default class TravelsUtil {
+export class DataUtil {
   
   constructor() {}
   
   static getCitiesAndCodes () {
-    const newArr = data.filter(obj => obj.type === 'Airports');
+    const newArr = airports.filter(obj => obj.type === 'Airports');
     return newArr.map((obj: any,) => {      
       const value = `${obj.city} (${obj.code})`
       return { value }
     })
   }
+
+  static getCountries () {
+    return countries.map(obj=> {
+      return {value: obj.name, code: obj['alpha-2']}
+    })
+  }
+
 }
 
 

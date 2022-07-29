@@ -4,6 +4,10 @@ export class ApiService {
 
   static CARB_INT_URL: string = 'https://www.carboninterface.com/api/v1';
   static API_KEY: string = 'E9Q2sW86qRep6bbcc4pCA';
+  static HEADERS_CONFIG = {
+    'Authorization' : `Bearer ${ApiService.API_KEY}`,
+    'Content-Type' : 'application/json',
+  }
 
   constructor() {}
 
@@ -19,10 +23,7 @@ export class ApiService {
       console.log('Here is the data object: ', data)
       const postReq = await fetch(`${ApiService.CARB_INT_URL}/estimates`, {
         method: 'POST',
-        headers: {
-          'Authorization' : `Bearer ${ApiService.API_KEY}`,
-          'Content-Type' : 'application/json',
-        },
+        headers: ApiService.HEADERS_CONFIG, 
         body: JSON.stringify(data)
       })
       const estimate = await postReq.json();
@@ -31,8 +32,43 @@ export class ApiService {
   }
 
   /***********ELECTRICITY API CALLS **********/
-  static async postElectricity() {
-    
+  static async postElectricity(electricityInfo: {bedrooms: number, country: string}) {
+    const {bedrooms, country} = electricityInfo;
+
+    if (bedrooms && country) {
+      let usagekWh = 0;
+      switch (electricityInfo.bedrooms) {
+        case 1:
+          usagekWh = 2000;
+          break;
+        case 3:
+          usagekWh = 3100;
+          break;
+        case 4:
+          usagekWh = 4600;
+          break;
+        default:
+          return;
+      }
+      
+      const data = {
+        type: 'electricity',
+        electricity_unit: 'kwh',
+        electricity_value: usagekWh,
+        country: electricityInfo.country
+      }
+
+      console.log('Here is the body of the post request for Electricity: ', data)
+  
+      const res = await fetch(`${ApiService.CARB_INT_URL}/estimates`, {
+        method: 'POST',
+        headers: ApiService.HEADERS_CONFIG,
+        body: JSON.stringify(data)
+  
+      })
+      const estimate = await res.json();
+      return estimate;
+    }
   }
 
 

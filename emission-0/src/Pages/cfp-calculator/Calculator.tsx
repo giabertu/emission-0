@@ -67,6 +67,7 @@ export function Calculator() {
   }
 
   /***********ELECTRICITY STATE LOGIC ***********/
+  const [country, setCountry] = useState('')
   const [bedrooms, setBedrooms] = useState<number>(0);
 
   function handleHouseholdButton (e: React.MouseEvent<HTMLButtonElement>) {
@@ -74,19 +75,22 @@ export function Calculator() {
     setBedrooms(Number(e.currentTarget.innerText[0]))
   }
 
+  function handleCountryInput(value: string, option: {value: string, code: string}) {
+    setCountry(option.code);
+  }
+
   /*********************************************/
 
   //HELPER FUNCTION
   function calcAndSetFootprint() {
     Carbon.calcDietFooprint({dietChoice, coffeeDrinker, consumption});
-    Carbon.calcElectricityFootprint(bedrooms);
     setTotalFootprint(Carbon.calcTotalFootprint()); 
   }
   
   //Everytime state changes, recaulculate footprint
   useEffect(() => {
     calcAndSetFootprint();
-  }, [dietChoice, coffeeDrinker, consumption, bedrooms])
+  }, [dietChoice, coffeeDrinker, consumption])
 
   useEffect(() => {
     (async () => {
@@ -100,6 +104,19 @@ export function Calculator() {
     })(); 
   }, [inputArray])
 
+
+  useEffect(() => {
+    (async () => {
+      const estimate = await ApiService.postElectricity({bedrooms, country})
+      if (estimate) {
+        console.log(estimate);
+        const {carbon_kg} = estimate.data.attributes;
+        console.log(carbon_kg);
+        Carbon.calcElectricityFootprint(Math.floor(carbon_kg))
+        calcAndSetFootprint();
+      }
+    })();
+  }, [bedrooms, country])
   
   return (
     <>
@@ -122,7 +139,7 @@ export function Calculator() {
         </TabPanel>
 
         <TabPanel>
-          <Electricity handleHouseholdButton={handleHouseholdButton}/>
+          <Electricity handleHouseholdButton={handleHouseholdButton} handleCountryInput={handleCountryInput}/>
         </TabPanel>
       </TabPanels>
     </Tabs>
