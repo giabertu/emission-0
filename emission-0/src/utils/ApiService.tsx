@@ -7,6 +7,7 @@ export class ApiService {
 
   constructor() {}
 
+  /***********TRAVELS API CALLS **********/
   static async postFlightInfo(flightsArray: FlightInfo[]) {
     const {proceed, legsArray} = ApiService.getLegsArray(flightsArray)
     if (proceed) {
@@ -28,6 +29,12 @@ export class ApiService {
       return estimate;
     }
   }
+
+  /***********ELECTRICITY API CALLS **********/
+  static async postElectricity() {
+    
+  }
+
 
 
   /*************HELPER FUNCTIONS *************/  

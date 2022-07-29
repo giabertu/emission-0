@@ -65,20 +65,28 @@ export function Calculator() {
     })
     setInputArray(newArr);
   }
-  
 
+  /***********ELECTRICITY STATE LOGIC ***********/
+  const [bedrooms, setBedrooms] = useState<number>(0);
+
+  function handleHouseholdButton (e: React.MouseEvent<HTMLButtonElement>) {
+    console.log(e.currentTarget.innerText)
+    setBedrooms(Number(e.currentTarget.innerText[0]))
+  }
+
+  /*********************************************/
 
   //HELPER FUNCTION
   function calcAndSetFootprint() {
     Carbon.calcDietFooprint({dietChoice, coffeeDrinker, consumption});
-    Carbon.calcElectricityFootprint();
+    Carbon.calcElectricityFootprint(bedrooms);
     setTotalFootprint(Carbon.calcTotalFootprint()); 
   }
   
   //Everytime state changes, recaulculate footprint
   useEffect(() => {
     calcAndSetFootprint();
-  }, [dietChoice, coffeeDrinker, consumption])
+  }, [dietChoice, coffeeDrinker, consumption, bedrooms])
 
   useEffect(() => {
     (async () => {
@@ -114,7 +122,7 @@ export function Calculator() {
         </TabPanel>
 
         <TabPanel>
-          <Electricity/>
+          <Electricity handleHouseholdButton={handleHouseholdButton}/>
         </TabPanel>
       </TabPanels>
     </Tabs>
