@@ -9,6 +9,9 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel, ChakraProvider } from '@chakra
 import './Calculator.css'
 import {Service} from '../../utils/Service'
 import { CheckboxChangeEvent } from "antd/lib/checkbox";
+import { FlightInfo } from "../../components/Travels/FlightInfo";
+
+let id = 0;
 
 export function Calculator() {
  
@@ -20,12 +23,7 @@ export function Calculator() {
   const [coffeeDrinker, setCoffeDrinker] = useState(false)
   const [consumption, setConsumption] = useState(100);
 
-  //HELPER FUNCTION
-  function calcDietAndFootprint() {
-    Service.calcDietFooprint({dietChoice, coffeeDrinker, consumption});
-    setTotalFootprint(Service.calcTotalFootprint()); 
-  }
-
+  
   //set diet choice to either 'Omnivore, Vegetarian or Vegan'
   function handleDietChoice(e: React.ChangeEvent<HTMLInputElement>) {
     setDietChoice(e.target.value);
@@ -36,18 +34,50 @@ export function Calculator() {
   function handleConsumption(value: number) {
     setConsumption(value);
   }
-
-  /***********TRAVELS STATE LOGIC ***********/
   
+  /***********TRAVELS STATE LOGIC ***********/
+  const [inputArray, setInputArray] = useState<FlightInfo[]>([])
+  
+  function handleAddFlight(){
+    setInputArray(inputArray.concat([{from: '', to: '', id,  del: false}]))
+    id++
+  }
+
+  function handleRemoveFlight(flightInfo: FlightInfo) {
+    flightInfo.del = true;
+    setInputArray(inputArray.filter((flight) => {
+      return !flight.del 
+    }));              
+  }
+
+  function handleInputSelect (component: string, value: string, flightInfo: FlightInfo) {
+    const newArr: any = inputArray.map((input: FlightInfo) => {
+      if (input.id == flightInfo.id) {
+        if (component == 'from') {
+          input.from = value;
+        } else {
+          input.to = value;
+        }
+      }
+      return input;
+    })
+    setInputArray(newArr);
+  }
+  
+
+
+  //HELPER FUNCTION
+  function calcAndSetFootprint() {
+    Service.calcDietFooprint({dietChoice, coffeeDrinker, consumption});
+    Service.calcTravelsFootprint();
+    Service.calcElectricityFootprint();
+    setTotalFootprint(Service.calcTotalFootprint()); 
+  }
   
   //Everytime state changes, recaulculate footprint
   useEffect(() => {
-    calcDietAndFootprint();
-  }, [dietChoice, coffeeDrinker, consumption])
-
-
-
-
+    calcAndSetFootprint();
+  }, [dietChoice, coffeeDrinker, consumption, inputArray])
 
   
   return (
@@ -67,7 +97,7 @@ export function Calculator() {
         </TabPanel>
 
         <TabPanel>
-          <Travels/>
+          <Travels handleAddFlight={handleAddFlight} handleRemoveFlight={handleRemoveFlight} handleInputSelect={handleInputSelect} inputArray={inputArray}/>
         </TabPanel>
 
         <TabPanel>

@@ -21,18 +21,14 @@ function App() {
             path="/cfp-calculator"
             element={<Calculator />}
           />
-          <Route
+          {/* <Route
             path="/diet"
             element={<Calculator />}
-          />
-          <Route
-            path="/travels"
-            element={<Travels />}
-          />
-          <Route
+          /> */}
+          {/* <Route
             path="/electricity"
             element={<Electricity />}
-          />
+          /> */}
         </Routes>
     </Router>
   );

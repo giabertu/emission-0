@@ -9,50 +9,17 @@ import { Button, ButtonGroup } from '@chakra-ui/react'
 
 let id = 0;
 
-function Travels(props: {setCurrent?: any}) {
-  const [inputArray, setInputArray] = useState<FlightInfo[]>([])
+function Travels(props: {handleAddFlight: any, handleRemoveFlight: any, handleInputSelect: any, inputArray: any}) {
+ 
+  const {handleAddFlight, handleRemoveFlight, handleInputSelect, inputArray} = props;
 
-  // const location: any = useLocation();
-  // //Properties of diet: dietChoice, coffeeDrinker, consumption (line 42: Diet.tsx)
-  // const diet = location.state?.data.diet;
-  const {setCurrent} = props;
-
-  const handleAddFlight = () => {
-    setInputArray(inputArray.concat([{from: '', to: '', id,  del: false}]))
-    id++
-  }
-
-  const handleRemoveFlight = (flightInfo: FlightInfo) => {
-    flightInfo.del = true;
-    setInputArray(inputArray.filter((flight) => {
-      return !flight.del 
-    }));              
-  }
-
-  const handleInputSelect = (component: string, value: string, flightInfo: FlightInfo) => {
-      const newArr: any = inputArray.map((input: FlightInfo, index) => {
-        if (input.id == flightInfo.id) {
-          if (component == 'from') {
-            input.from = value;
-          } else {
-            input.to = value;
-          }
-        }
-        return input;
-      })
-      setInputArray(newArr);
-  }
-
-  useEffect(() => {
-
-  }, [inputArray])
 
   return (
     <div>
       <h1>Travels</h1>
       <h2>Add flights you took in the past year</h2>
       <button onClick={handleAddFlight}>Add flight</button>
-      {inputArray.length > 0 ? inputArray.map((flightInfo, index) => 
+      {inputArray.length > 0 ? inputArray.map((flightInfo: FlightInfo) => 
         <AirportInput key={flightInfo.id} handleRemoveFlight={handleRemoveFlight} flightInfo={flightInfo} handleInputSelect={handleInputSelect}/>
         ) : null}
         <h3>{Service.diet}</h3>
