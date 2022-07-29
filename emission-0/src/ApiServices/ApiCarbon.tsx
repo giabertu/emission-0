@@ -1,17 +1,22 @@
-import { FlightInfo } from "./FlightInfo";
+import { FlightInfo } from "../utils/FlightInfo";
 
 
-//Table of contents:
-//1. Carbon Interface
-//  1. Travels Api call
-//  2. Electricity Api call
-//2. CO2 Offset API
-//  1. Price call 
-//  2. Compensate call
+/* 
+Table of contents:
+
+  1. Carbon Interface
+    1.1 Travels Api call
+    2.2 Electricity Api call
+
+  2. CO2 Offset API
+    2.1 Price call 
+    2.2 Compensate call
+
+  3. Helper functions
+ */
 
 
-
-export class ApiService {
+export class ApiCarbon {
 
   constructor() {}
   
@@ -19,13 +24,13 @@ export class ApiService {
   static CARB_INT_URL: string = 'https://www.carboninterface.com/api/v1';
   static API_KEY: string = 'E9Q2sW86qRep6bbcc4pCA';
   static HEADERS_CONFIG = {
-    'Authorization' : `Bearer ${ApiService.API_KEY}`,
+    'Authorization' : `Bearer ${ApiCarbon.API_KEY}`,
     'Content-Type' : 'application/json',
   }
 
   /***TRAVELS API CALL ***/
   static async postFlightInfo(flightsArray: FlightInfo[]) {
-    const {proceed, legsArray} = ApiService.getLegsArray(flightsArray)
+    const {proceed, legsArray} = ApiCarbon.getLegsArray(flightsArray)
     if (proceed) {
       const data = {
         type: 'flight',
@@ -33,9 +38,9 @@ export class ApiService {
         legs: legsArray
       }
       console.log('Here is the data object: ', data)
-      const postReq = await fetch(`${ApiService.CARB_INT_URL}/estimates`, {
+      const postReq = await fetch(`${ApiCarbon.CARB_INT_URL}/estimates`, {
         method: 'POST',
-        headers: ApiService.HEADERS_CONFIG, 
+        headers: ApiCarbon.HEADERS_CONFIG, 
         body: JSON.stringify(data)
       })
       const estimate = await postReq.json();
@@ -71,9 +76,9 @@ export class ApiService {
 
       console.log('Here is the body of the post request for Electricity: ', data)
   
-      const res = await fetch(`${ApiService.CARB_INT_URL}/estimates`, {
+      const res = await fetch(`${ApiCarbon.CARB_INT_URL}/estimates`, {
         method: 'POST',
-        headers: ApiService.HEADERS_CONFIG,
+        headers: ApiCarbon.HEADERS_CONFIG,
         body: JSON.stringify(data)
   
       })
@@ -81,8 +86,6 @@ export class ApiService {
       return estimate;
     }
   }
-
-
 
   /*************HELPER FUNCTIONS *************/  
   static getLegsArray(flightsArray: FlightInfo[]) {

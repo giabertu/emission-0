@@ -1,22 +1,46 @@
+import { Button } from 'antd';
 import React, { useEffect, useState } from 'react'
-import { ApiService } from '../utils/ApiService';
+import CountUp from 'react-countup';
+import { ApiCarbon } from '../ApiServices/ApiCarbon';
+import { ApiOffset } from '../ApiServices/ApiOffset';
+import './Offset.css'
 
 function Offset(props: {footprint: number}) {
 
-  const [priceEstimate, setPriceEstimate] = useState(0);
-
   const {footprint} = props;
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const estimate = await ApiService.
-  //   })
-  // }, [])
+  const [priceEstimate, setPriceEstimate] = useState(0);
+  const [checkoutURL, setCheckoutURL] = useState('')
+
+  function handleOffsetClick() {
+
+  }
+
+  useEffect(() => {
+    (async () => {
+      const estimate = await ApiOffset.getPrice(footprint)
+      console.log(estimate)
+      setPriceEstimate(estimate.priceEUR);
+    })()
+  }, [])
+
+  useEffect(() => {
+    (async () => {
+      const url = await ApiOffset.getCompensate(footprint)
+      console.log(url)
+      setCheckoutURL(url);
+    })()
+  }, [])
 
   return (
     <div className='Offset'>
-      <h1>Your total carbon footprint: {footprint} kg CO2 emissions</h1>
-      <h2>You can offset your carbon footprint with {priceEstimate}</h2>
+      <h1>Your total carbon footprint: <CountUp end={footprint} duration={1.2}/> kg-CO2 emissions</h1> 
+      { priceEstimate ?
+        <div>
+          <p>You can offset your carbon footprint with <span className='price-estimate'>€<CountUp end={priceEstimate} duration={1} delay={1.5}/></span></p>
+          <a href={checkoutURL}><Button type="primary" shape="round" size={'large'}>Offset now</Button></a>
+        </div> : null 
+      }
     </div>
   )
 }

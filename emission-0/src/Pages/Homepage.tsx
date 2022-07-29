@@ -1,5 +1,7 @@
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import logo from './Mission-0.png'
+import './Homepage.css'
 
 function Homepage() {
   const navigate = useNavigate()
@@ -13,6 +15,9 @@ function Homepage() {
   return (
     <div className='Homepage'>
       <h1>Homepage</h1>
+      <div>
+        <img className='logo' src={logo} />
+      </div>
       <button onClick={() => {navigate('/cfp-calculator')}}>Start</button>
     </div>
   )

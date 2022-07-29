@@ -10,7 +10,7 @@ import './Calculator.css'
 import {Carbon} from '../../utils/Carbon'
 import { CheckboxChangeEvent } from "antd/lib/checkbox";
 import { FlightInfo } from "../../utils/FlightInfo";
-import {ApiService} from '../../utils/ApiService'
+import {ApiCarbon} from '../../ApiServices/ApiCarbon'
 import uniqid from 'uniqid'
 import { isNamedExports } from "typescript";
 import { Button } from "antd";
@@ -104,7 +104,7 @@ export function Calculator() {
 
   useEffect(() => {
     (async () => {
-      const estimate = await ApiService.postFlightInfo(inputArray);
+      const estimate = await ApiCarbon.postFlightInfo(inputArray);
       if (estimate){
         const {carbon_kg} = estimate.data.attributes;
         console.log(carbon_kg)
@@ -117,7 +117,7 @@ export function Calculator() {
 
   useEffect(() => {
     (async () => {
-      const estimate = await ApiService.postElectricity({bedrooms, country})
+      const estimate = await ApiCarbon.postElectricity({bedrooms, country})
       if (estimate) {
         console.log(estimate);
         const {carbon_kg} = estimate.data.attributes;
