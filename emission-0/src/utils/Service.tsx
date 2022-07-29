@@ -1,5 +1,5 @@
 
-export default class Service {
+export class Service {
   static diet: number = 0;
   static travels: number = 0;
   static electricity: number = 0;
@@ -10,7 +10,7 @@ export default class Service {
   static calcDietFooprint(dietInfo: {dietChoice: string, coffeeDrinker: boolean, consumption: number}) {
     let yearlyCarbonFootprintKg = 0;
     const {dietChoice, coffeeDrinker, consumption} = dietInfo;
-
+    console.log('Here is the value of coffeeDrinker: ', coffeeDrinker)
     switch (dietChoice) {
       case 'Omnivore':
         yearlyCarbonFootprintKg = 700;
@@ -55,6 +55,10 @@ export default class Service {
 
   static calcElectricityFootprint() {
 
+  }
+
+  static calcTotalFootprint() {
+    return Service.electricity + Service.diet + Service.travels;
   }
 
 }

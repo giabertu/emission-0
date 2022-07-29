@@ -1,17 +1,57 @@
-import { Steps} from "antd";
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import CalcNavButtons from "../../components/CalcNavButtons";
+// import { Steps} from "antd";
+// import { useNavigate } from "react-router-dom"
+// import CalcNavButtons from "../../components/CalcNavButtons";
+import React, { useEffect, useState } from "react"
 import Diet from "./Diet";
 import Electricity from "./Electricity";
 import Travels from "./Travels";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, ChakraProvider } from '@chakra-ui/react'
 import './Calculator.css'
+import {Service} from '../../utils/Service'
+import { CheckboxChangeEvent } from "antd/lib/checkbox";
 
 export function Calculator() {
+ 
+  /***********TOTAL FOOTPRINT STATE LOGIC ***********/
+  const [totalFootprint, setTotalFootprint] = useState(0)
+
+  /***********DIET STATE LOGIC ***********/
+  const [dietChoice, setDietChoice] = useState('')
+  const [coffeeDrinker, setCoffeDrinker] = useState(false)
+  const [consumption, setConsumption] = useState(100);
+
+  //HELPER FUNCTION
+  function calcDietAndFootprint() {
+    Service.calcDietFooprint({dietChoice, coffeeDrinker, consumption});
+    setTotalFootprint(Service.calcTotalFootprint()); 
+  }
+
+  //set diet choice to either 'Omnivore, Vegetarian or Vegan'
+  function handleDietChoice(e: React.ChangeEvent<HTMLInputElement>) {
+    setDietChoice(e.target.value);
+  }
+  function handleCheckbox (e:  CheckboxChangeEvent){
+    setCoffeDrinker(!coffeeDrinker);
+  }
+  function handleConsumption(value: number) {
+    setConsumption(value);
+  }
+
+  /***********TRAVELS STATE LOGIC ***********/
+  
+  
+  //Everytime state changes, recaulculate footprint
+  useEffect(() => {
+    calcDietAndFootprint();
+  }, [dietChoice, coffeeDrinker, consumption])
+
+
+
+
 
   
   return (
+    <>
     <Tabs variant='soft-rounded' colorScheme='blue'>
 
         <TabList>
@@ -23,7 +63,7 @@ export function Calculator() {
       <TabPanels>
 
         <TabPanel>
-          <Diet/>
+          <Diet handleDietChoice={handleDietChoice} handleCheckbox={handleCheckbox} handleConsumption={handleConsumption} dietChoice={dietChoice}/>
         </TabPanel>
 
         <TabPanel>
@@ -33,9 +73,10 @@ export function Calculator() {
         <TabPanel>
           <Electricity/>
         </TabPanel>
-
       </TabPanels>
     </Tabs>
+    <h2>Current Carbon Footprint: {totalFootprint}</h2>
+    </>
   )
 }
 

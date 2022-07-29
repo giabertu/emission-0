@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 import CalcNavButtons from '../../components/CalcNavButtons'
 import AirportInput from '../../components/Travels/AirportInput'
 import {FlightInfo} from '../../components/Travels/FlightInfo'
-import Service from '../../utils/Service'
+import {Service} from '../../utils/Service'
 import { Button, ButtonGroup } from '@chakra-ui/react'
 
 let id = 0;
@@ -24,8 +24,7 @@ function Travels(props: {setCurrent?: any}) {
 
   const handleRemoveFlight = (flightInfo: FlightInfo) => {
     flightInfo.del = true;
-    setInputArray(inputArray.filter((flight, index, array) => {
-      console.log(array)
+    setInputArray(inputArray.filter((flight) => {
       return !flight.del 
     }));              
   }
