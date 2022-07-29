@@ -3,11 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import CalcNavButtons from '../../components/CalcNavButtons'
 import AirportInput from '../../components/Travels/AirportInput'
-import {FlightInfo} from '../../components/Travels/FlightInfo'
+import {FlightInfo} from '../../utils/FlightInfo'
 import {Carbon} from '../../utils/Carbon'
 import { Button, ButtonGroup } from '@chakra-ui/react'
 
-let id = 0;
 
 function Travels(props: {handleAddFlight: any, handleRemoveFlight: any, handleInputSelect: any, inputArray: any}) {
  

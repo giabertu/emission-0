@@ -9,9 +9,12 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel, ChakraProvider } from '@chakra
 import './Calculator.css'
 import {Carbon} from '../../utils/Carbon'
 import { CheckboxChangeEvent } from "antd/lib/checkbox";
-import { FlightInfo } from "../../components/Travels/FlightInfo";
+import { FlightInfo } from "../../utils/FlightInfo";
+import {ApiService} from '../../utils/ApiService'
+import uniqid from 'uniqid'
 
-let id = 0;
+
+//Unique id for new FlightInfo objects (updated at line 44)
 
 export function Calculator() {
  
@@ -39,8 +42,7 @@ export function Calculator() {
   const [inputArray, setInputArray] = useState<FlightInfo[]>([])
   
   function handleAddFlight(){
-    setInputArray(inputArray.concat([{from: '', to: '', id,  del: false}]))
-    id++
+    setInputArray(inputArray.concat([{from: '', to: '', id: uniqid(),  del: false}]))
   }
 
   function handleRemoveFlight(flightInfo: FlightInfo) {
@@ -69,7 +71,6 @@ export function Calculator() {
   //HELPER FUNCTION
   function calcAndSetFootprint() {
     Carbon.calcDietFooprint({dietChoice, coffeeDrinker, consumption});
-    Carbon.calcTravelsFootprint();
     Carbon.calcElectricityFootprint();
     setTotalFootprint(Carbon.calcTotalFootprint()); 
   }
@@ -77,7 +78,19 @@ export function Calculator() {
   //Everytime state changes, recaulculate footprint
   useEffect(() => {
     calcAndSetFootprint();
-  }, [dietChoice, coffeeDrinker, consumption, inputArray])
+  }, [dietChoice, coffeeDrinker, consumption])
+
+  useEffect(() => {
+    (async () => {
+      const estimate = await ApiService.postFlightInfo(inputArray);
+      if (estimate){
+        const {carbon_kg} = estimate.data.attributes;
+        console.log(carbon_kg)
+        Carbon.calcTravelsFootprint(carbon_kg);
+        calcAndSetFootprint();
+      }
+    })(); 
+  }, [inputArray])
 
   
   return (
@@ -109,19 +122,3 @@ export function Calculator() {
     </>
   )
 }
-
-
-//const [current, setCurrent] = useState<number>(0);
-// return (
-//   <div className="CalculatorApp">
-//     {current === 0 ? 
-//     <Diet setCurrent={setCurrent}/> : null  
-//     }
-//     {current === 1 ?
-//     <Travels setCurrent={setCurrent}/> : null  
-//     }
-//     {current === 2 ? 
-//     <Electricity setCurrent={setCurrent}/> : null
-//     }
-//   </div>
-//   )

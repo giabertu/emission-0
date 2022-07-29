@@ -10,7 +10,6 @@ export class Carbon {
   static calcDietFooprint(dietInfo: {dietChoice: string, coffeeDrinker: boolean, consumption: number}) {
     let yearlyCarbonFootprintKg = 0;
     const {dietChoice, coffeeDrinker, consumption} = dietInfo;
-    console.log('Here is the value of coffeeDrinker: ', coffeeDrinker)
     switch (dietChoice) {
       case 'Omnivore':
         yearlyCarbonFootprintKg = 700;
@@ -49,8 +48,9 @@ export class Carbon {
 
   }
 
-  static calcTravelsFootprint() {
-
+  static calcTravelsFootprint(carbon_kg: number) {
+    Carbon.travels = carbon_kg;
+    return Carbon.travels;
   }
 
   static calcElectricityFootprint() {

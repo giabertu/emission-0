@@ -1,8 +1,8 @@
 import { AutoComplete } from 'antd';
 import React, { useEffect, useState } from 'react';
-import TravelUtils from '../../utils/util'
+import TravelUtils from '../../utils/TravelsUtil'
 import './AirportInput.css'
-import {FlightInfo} from './FlightInfo'
+import {FlightInfo} from '../../utils/FlightInfo'
 
 const data = TravelUtils.getCitiesAndCodes();
 const options = [
