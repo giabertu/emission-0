@@ -43,7 +43,7 @@ function Diet(props: {setCurrent?: any}) {
       <Checkbox onChange={handleCheckbox}>I drink coffee regularly</Checkbox>
       <ConsumptionInput handleConsumption={handleConsumption} dietChoice={dietChoice}/>
       <h3>Current yearly footprint: {Carbon.diet} kg</h3>
-      <CalcNavButtons back={'/cfp-calculator'} next={'/travels'} setCurrent={setCurrent} exit={'/'}/>
+      {/* <CalcNavButtons back={'/cfp-calculator'} next={'/travels'} setCurrent={setCurrent} exit={'/'}/> */}
     </div>
   )
 }

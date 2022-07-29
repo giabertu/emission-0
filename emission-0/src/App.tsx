@@ -7,7 +7,7 @@ import Homepage from './Pages/Homepage';
 import Diet from './Pages/cfp-calculator/Diet';
 import Travels from './Pages/cfp-calculator/Travels';
 import Electricity from './Pages/cfp-calculator/Electricity';
-import { TestPage } from './Pages/cfp-calculator/TestPage';
+
 
 function App() {
  
@@ -23,7 +23,7 @@ function App() {
           />
           <Route
             path="/diet"
-            element={<TestPage />}
+            element={<Calculator />}
           />
           <Route
             path="/travels"

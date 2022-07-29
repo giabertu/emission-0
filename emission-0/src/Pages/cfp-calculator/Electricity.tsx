@@ -18,7 +18,7 @@ function Electricity(props: {setCurrent?: any}) {
       <h1>Electricity</h1>
       <h2>How many bedrooms does your house have?</h2>
       <HouseholdButtons handleHouseholdButton={handleHouseholdButton}/>
-      <CalcNavButtons back={'/travels'} next={'/'} setCurrent={setCurrent} />
+     {/*  <CalcNavButtons back={'/travels'} next={'/'} setCurrent={setCurrent} /> */}
     </div>
   )
 }
