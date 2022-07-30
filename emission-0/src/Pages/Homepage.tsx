@@ -12,10 +12,6 @@ function Homepage() {
   const navigate = useNavigate()
   const location = useLocation();
 
-  //Logic to pass carbon footprint calculation to homepage.
-  const data: {totalFootprint: number} = location.state as {totalFootprint: number};
-  console.log(data.totalFootprint);
-
 
   return (
     <div className='Homepage'>

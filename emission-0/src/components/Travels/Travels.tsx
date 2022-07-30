@@ -13,18 +13,18 @@ function Travels(props: {handleAddFlight: any, handleRemoveFlight: any, handleIn
 
 
   return (
-    <div id='Travels'>
-      <div className='travels-html'>
-        <h1>Travels</h1>
+    <div className='calculator-component'>
+      <div className='calculator-html'>
+        {/* <h1>Travels</h1> */}
         <h2>Add flights you took in the past year</h2>
-        <button onClick={handleAddFlight}>Add flight</button>
+        <button id='add-flight-button'onClick={handleAddFlight}>Add flight</button>
         {inputArray.length > 0 ? inputArray.map((flightInfo: FlightInfo) => 
           <AirportInput key={flightInfo.id} handleRemoveFlight={handleRemoveFlight} flightInfo={flightInfo} handleInputSelect={handleInputSelect}/>
           ) : null}
       </div>
-      <div className='canvas-div'> 
-        <Canvas camera={{position: [0, 10, 10]}}>
-          <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} target={[0, 0, 0]} minPolarAngle={0} maxPolarAngle={0}/>
+      <div className='calculator-canvas-div'> 
+        <Canvas camera={{position: [0, 0, 15]}}>
+          <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} target={[0, 0, 0]} /* minPolarAngle={0} maxPolarAngle={0} *//>
             <ambientLight intensity={0.5} />
             <directionalLight
               color={"white"}
@@ -36,9 +36,17 @@ function Travels(props: {handleAddFlight: any, handleRemoveFlight: any, handleIn
               {inputArray.length > 0 ? 
               inputArray.map((element: any, index: number) => {
                 if (index === 0) {
-                  return <PlaneModel position={[0,0,0]}/>
+                  return <PlaneModel position={[0, 6, 0]}/>
                 }
-                return <PlaneModel position={[Math.random() * 5, Math.random() *5, Math.random()*5]}/>
+                if (index === 1) {
+                  return <PlaneModel position={[0,1,0]}/>
+                }
+                if (index === 2) {
+                  return <PlaneModel position={[0, -4, 0]}/>
+                }
+                if (index === 3) {
+                  return <PlaneModel position={[0, -9, 0]}/>
+                }
               }) : null
             }
             </Suspense>

@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import './Diet.css'
 import DietButtons from '../../components/Diet/DietButtons';
 import ConsumptionInput from '../../components/Diet/ConsumptionInput';
 import { Checkbox } from 'antd';
-import type { CheckboxChangeEvent } from 'antd/es/checkbox';
-import CalcNavButtons from '../../components/CalcNavButtons';
-import {Carbon} from '../../utils/Carbon';
+import { OrbitControls } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
 
 function Diet(props: {handleDietChoice: any, handleCheckbox: any, handleConsumption: any, dietChoice: any}) {
 
@@ -16,13 +15,29 @@ function Diet(props: {handleDietChoice: any, handleCheckbox: any, handleConsumpt
   })
 
   return (
-    <div className='Diet'>
-      <h1>Diet</h1>
-      <h2>What kind of diet do you follow?</h2>
-      <DietButtons handleDietChoice={handleDietChoice} /> 
-      <Checkbox onChange={handleCheckbox}>I drink coffee regularly</Checkbox>
-      <ConsumptionInput handleConsumption={handleConsumption} dietChoice={dietChoice}/>
-      {/* <CalcNavButtons back={'/cfp-calculator'} next={'/travels'} setCurrent={setCurrent} exit={'/'}/> */}
+    <div className='calculator-component'>
+      <div className='calculator-html'>
+ {/*        <h1>Diet</h1> */}
+        <h2>Choose your diet:</h2>
+        <DietButtons handleDietChoice={handleDietChoice} /> 
+        <Checkbox onChange={handleCheckbox}><span className='checkbox'>I drink coffee regularly</span></Checkbox>
+        <ConsumptionInput handleConsumption={handleConsumption} dietChoice={dietChoice}/>
+      </div>
+      <div className='calculator-canvas-div'> 
+        <Canvas camera={{position: [0, 0, 15]}}>
+          <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} target={[0, 0, 0]} /* minPolarAngle={0} maxPolarAngle={0} *//>
+            <ambientLight intensity={0.5} />
+            <directionalLight
+              color={"white"}
+              intensity={0.5}
+              position={[-20, 100, 50]}
+              />
+            <Suspense 
+            fallback={null}>
+              {/*Missing model  */}
+            </Suspense>
+        </Canvas>
+      </div>
     </div>
   )
 }

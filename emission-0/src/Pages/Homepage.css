@@ -1,7 +1,8 @@
 .Homepage {
   display: flex;
   flex-direction: column;
-  width: fit-content;
+  width: 100vw;
+  height: 100vh;
 }
 
 .homepage-html {
@@ -16,8 +17,8 @@
 .background-img {
   position: absolute;
   z-index: -1;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
 
 .canvas-div {
@@ -26,6 +27,7 @@
   width: 70vw;
   left: 400px;
   z-index: 1;
+  outline: solid 1px;
 }
 
 #title {

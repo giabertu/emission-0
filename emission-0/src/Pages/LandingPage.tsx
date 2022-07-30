@@ -9,13 +9,11 @@ function LandingPage() {
 
   //Logic to pass carbon footprint calculation to homepage.
   const data: {totalFootprint: number} = location.state as {totalFootprint: number};
-  console.log(data.totalFootprint);
-  const footprint = data.totalFootprint;
 
   return (
     <>
-    { footprint  ?
-      <Offset footprint={footprint}/> :
+    { data.totalFootprint  ?
+      <Offset footprint={data.totalFootprint}/> :
       <Homepage/>
     }    
     </>

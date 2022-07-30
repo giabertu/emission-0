@@ -1,18 +1,38 @@
-import React, { useState } from 'react'
+import { OrbitControls } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import React, { Suspense, useState } from 'react'
 import CountryInput from '../../components/Electricity/CountryInput';
 import HouseholdButtons from '../../components/Electricity/HouseholdButtons'
+import './Electricity.css'
 
 function Electricity(props: {handleHouseholdButton: any, handleCountryInput: any}) {
 
   const {handleHouseholdButton, handleCountryInput} = props;
 
   return (
-    <div>
-      <h1>Electricity</h1>
-      <h2>In which country do you live in?</h2>
-      <CountryInput handleCountryInput={handleCountryInput}/>
-      <h2>How many bedrooms does the house you live in have?</h2>
-      <HouseholdButtons handleHouseholdButton={handleHouseholdButton}/>
+    <div className='calculator-component'>
+      <div className='calculator-html'>
+        {/* <h1>Electricity</h1> */}
+        <h2>In which country do you live in?</h2>
+        <CountryInput handleCountryInput={handleCountryInput}/>
+        <h2>How many bedrooms does the house you live in have?</h2>
+        <HouseholdButtons handleHouseholdButton={handleHouseholdButton}/>
+      </div>
+      <div className='calculator-canvas-div'> 
+        <Canvas camera={{position: [0, 0, 15]}}>
+          <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} target={[0, 0, 0]} /* minPolarAngle={0} maxPolarAngle={0} *//>
+            <ambientLight intensity={0.5} />
+            <directionalLight
+              color={"white"}
+              intensity={0.5}
+              position={[-20, 100, 50]}
+              />
+            <Suspense 
+            fallback={null}>
+              {/*Missing model  */}
+            </Suspense>
+        </Canvas>
+      </div>
     </div>
   )
 }

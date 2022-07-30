@@ -48,7 +48,11 @@ export function Calculator() {
   const [inputArray, setInputArray] = useState<FlightInfo[]>([])
   
   function handleAddFlight(){
-    setInputArray(inputArray.concat([{from: '', to: '', id: uniqid(),  del: false}]))
+    if (inputArray.length < 4) {
+      setInputArray(inputArray.concat([{from: '', to: '', id: uniqid(),  del: false}]))
+    } else {
+      alert('Too many flights')
+    }
   }
 
   function handleRemoveFlight(flightInfo: FlightInfo) {
@@ -135,35 +139,35 @@ export function Calculator() {
   
   return (
     <>
-    {tabIndex === 1 ? 
-      <img src={Travels_bg2} className='background-img' /> : null }
+    <div id='Calculator'>
+{/*       {tabIndex === 1 ? 
+        <img src={Travels_bg2} className='background-img spotlight' /> : null } */}
 
-    <Tabs variant='soft-rounded' colorScheme='blue' onChange={(index) => handleTabChange(index)}>
-        <TabList>
-          <Tab className="tab">Diet</Tab>
-          <Tab className="tab">Travels</Tab>
-          <Tab className="tab">Electricity</Tab>
-        </TabList>
+      <Tabs variant='soft-rounded' colorScheme='blue' onChange={(index) => handleTabChange(index)}>
+          <TabList>
+            <Tab className={tabIndex == 0 ? "tab selected-tab" : 'tab'}>Diet</Tab>
+            <Tab className={tabIndex == 1 ? "tab selected-tab" : 'tab'}>Travels</Tab>
+            <Tab className={tabIndex == 2 ? "tab selected-tab" : 'tab'}>Electricity</Tab>
+          </TabList>
 
-      <TabPanels>
+        <TabPanels>
+          <TabPanel>
+            <Diet handleDietChoice={handleDietChoice} handleCheckbox={handleCheckbox} handleConsumption={handleConsumption} dietChoice={dietChoice}/>
+          </TabPanel>
 
-        <TabPanel>
-          <Diet handleDietChoice={handleDietChoice} handleCheckbox={handleCheckbox} handleConsumption={handleConsumption} dietChoice={dietChoice}/>
-        </TabPanel>
+          <TabPanel>
+            <Travels handleAddFlight={handleAddFlight} handleRemoveFlight={handleRemoveFlight} handleInputSelect={handleInputSelect} inputArray={inputArray}/>
+          </TabPanel>
 
-        <TabPanel>
-          <Travels handleAddFlight={handleAddFlight} handleRemoveFlight={handleRemoveFlight} handleInputSelect={handleInputSelect} inputArray={inputArray}/>
-        </TabPanel>
-
-        <TabPanel>
-          <Electricity handleHouseholdButton={handleHouseholdButton} handleCountryInput={handleCountryInput}/>
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
-    <h2>Current Carbon Footprint: {totalFootprint}</h2>
-    <Link to={'/'} state={{totalFootprint}}>
-      {showDone ? <Button type="primary" shape="round" size={'large'}>Done</Button> : null}
-    </Link>
+          <TabPanel>
+            <Electricity handleHouseholdButton={handleHouseholdButton} handleCountryInput={handleCountryInput}/>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+      <Link to={'/'} state={{totalFootprint}}>
+        {showDone ? <Button type="primary" shape="round" size={'large'}>Done</Button> : null}
+      </Link>
+    </div>
     </>
   )
 }
