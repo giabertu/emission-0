@@ -4,6 +4,14 @@
   width: fit-content;
 }
 
-.logo {
-  width: 200px;
+.homepage-html {
+  position: absolute;
+  left: 50px;
+  z-index: 2;
+}
+
+.canvas-div {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
 }
