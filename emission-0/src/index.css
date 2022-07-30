@@ -1,6 +1,11 @@
 @import '~antd/dist/antd.css';
 @import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
 
+* {
+  font-family: 'Secular One', cursive;
+}
+
+
 body {
   margin: 0;
   font-family: 'Secular One', cursive;

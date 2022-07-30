@@ -1,0 +1,11 @@
+Model Information:
+* title:	Plane
+* source:	https://sketchfab.com/3d-models/plane-aa001f5a88f64b16b98356c042f2d5f3
+* author:	ideehochzwei (https://sketchfab.com/ideehochzwei)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Plane" (https://sketchfab.com/3d-models/plane-aa001f5a88f64b16b98356c042f2d5f3) by ideehochzwei (https://sketchfab.com/ideehochzwei) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

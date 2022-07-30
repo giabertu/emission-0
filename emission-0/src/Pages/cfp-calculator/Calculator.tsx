@@ -1,7 +1,7 @@
 // import { Steps} from "antd";
 // import { useNavigate } from "react-router-dom"
 // import CalcNavButtons from "../../components/CalcNavButtons";
-import React, { useEffect, useState } from "react"
+import React, { Suspense, useEffect, useState } from "react"
 import Diet from "../../components/Diet/Diet"
 import Travels from "../../components/Travels/Travels"
 import Electricity from "../../components/Electricity/Electricity"
@@ -12,10 +12,13 @@ import { CheckboxChangeEvent } from "antd/lib/checkbox";
 import { FlightInfo } from "../../utils/FlightInfo";
 import {ApiCarbon} from '../../ApiServices/ApiCarbon'
 import uniqid from 'uniqid'
-import { isNamedExports } from "typescript";
 import { Button } from "antd";
 import { Link } from "react-router-dom";
-
+import Travels_bg from '../../components/Travels/Travels_bg.svg'
+import Travels_bg2 from '../../components/Travels/Travels_bg2.svg'
+import { OrbitControls } from "@react-three/drei"
+import { Canvas } from "@react-three/fiber"
+import PlaneModel from "../../PlaneModel"
 
 //Unique id for new FlightInfo objects (updated at line 44)
 
@@ -83,12 +86,14 @@ export function Calculator() {
   }
 
   /***********DONE BUTTON STATE LOGIC*********/
+  const [tabIndex, setTabIndex] = useState<number>(0)
   const [showDone, setShowDone] = useState<boolean>(false)
 
   function handleTabChange (index: number) {
-    if (index === 2) {
+    if (index === 2){
       setShowDone(true);
     }
+    setTabIndex(index);
   }
 
   //HELPER FUNCTION
@@ -130,6 +135,9 @@ export function Calculator() {
   
   return (
     <>
+    {tabIndex === 1 ? 
+      <img src={Travels_bg2} className='background-img' /> : null }
+
     <Tabs variant='soft-rounded' colorScheme='blue' onChange={(index) => handleTabChange(index)}>
         <TabList>
           <Tab className="tab">Diet</Tab>
