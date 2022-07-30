@@ -5,13 +5,31 @@
 }
 
 .homepage-html {
-  position: absolute;
-  left: 50px;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  padding: 200px 150px;
+}
+
+.background-img {
+  position: absolute;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
 }
 
 .canvas-div {
+  position: absolute;
   height: 100vh;
-  width: 100vw;
-  position: relative;
+  width: 70vw;
+  left: 400px;
+  z-index: 1;
+}
+
+#title {
+  font-size: 5rem;
+  font-family: 'Secular One', cursive;
+  color: rgb(200, 255, 212);
+  text-shadow: 1px 1px 2px rgb(61, 61, 61);
 }

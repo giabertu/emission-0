@@ -1,9 +1,11 @@
 import React, { Suspense } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import Model from '../EarthModel'
+import EarthModel from '../EarthModel'
 import './Homepage.css'
 import { Canvas } from '@react-three/fiber'
 import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei'
+import Clouds from './Clouds_bg.svg'
+import { Button } from 'antd'
 
 function Homepage() {
   const navigate = useNavigate()
@@ -17,8 +19,8 @@ function Homepage() {
   return (
     <div className='Homepage'>
       <div className='homepage-html'>
-        <h1>Homepage</h1>
-        <button onClick={() => {navigate('/cfp-calculator')}}>Start</button>
+        <h1 id='title'>eMission-0</h1>
+        <Button type="primary" shape="round" size={'large'} onClick={() => {navigate('/cfp-calculator')}}>Start</Button>
       </div>
       <div className='canvas-div'> 
         <Canvas camera={{position: [0, 95, 10]}}>
@@ -31,10 +33,11 @@ function Homepage() {
               position={[-20, 100, 50]}
               />
             <Suspense fallback={null}>
-              <Model/>
+              <EarthModel/>
             </Suspense>
         </Canvas>
       </div>
+      <img className='background-img' src={Clouds} />
     </div>
   )
 }
