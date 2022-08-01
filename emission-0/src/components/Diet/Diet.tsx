@@ -8,12 +8,16 @@ import { Canvas } from '@react-three/fiber';
 import { MeatModel } from '../../MeatModel';
 import { DietChoiceModel } from '../../OmnivoreModel';
 import { CoffeeModel } from '../../CoffeeModel';
+import { FruitBowlModel } from '../../FruitBowlModel';
+
+
 
 function Diet(props: {handleDietChoice: any, handleCheckbox: any, handleConsumption: any, dietState: {dietChoice: string, coffeeDrinker: boolean, consumption: number}}) {
-
+  
+  
   const {handleDietChoice, handleCheckbox, handleConsumption, dietState} = props;
   const {dietChoice, coffeeDrinker, consumption} = dietState;
-
+  
   useEffect(() => {
     // setCarbon(Carbon.calcDietFooprint({dietChoice, coffeeDrinker, consumption}));
   })
@@ -38,9 +42,7 @@ function Diet(props: {handleDietChoice: any, handleCheckbox: any, handleConsumpt
               />
             <Suspense 
             fallback={null}>
-              { dietChoice == 'Omnivore' ? 
-                <DietChoiceModel dietChoice={dietChoice} milkPosition={[1.5, -0.7, 1.9]} meatPosition={[0,0.3,0]} cheesePosition={[1.5,-0.8,-1.9]}/> : null
-              }
+                <DietChoiceModel dietChoice={dietChoice} fruitPosition={[0,-0.9,0.25]} milkPosition={[1.5, -0.7, 1.9]} meatPosition={[0,0.3,0]} cheesePosition={[1.5,-0.8,-1.9]}/>
               { coffeeDrinker ? 
                 <CoffeeModel position={[4,-0.5,0]}/> : null
               }

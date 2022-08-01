@@ -12,7 +12,7 @@ function LandingPage() {
 
   return (
     <>
-    { data.totalFootprint  ?
+    { data?.totalFootprint  ?
       <Offset footprint={data.totalFootprint}/> :
       <Homepage/>
     }    
