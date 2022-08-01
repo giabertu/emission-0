@@ -110,7 +110,8 @@ export function Calculator() {
     Carbon.calcDietFooprint({dietChoice, coffeeDrinker, consumption});
     setTotalFootprint(Carbon.calcTotalFootprint()); 
   }
-  
+
+
   //Everytime state changes, recaulculate footprint
   useEffect(() => {
     calcAndSetFootprint();

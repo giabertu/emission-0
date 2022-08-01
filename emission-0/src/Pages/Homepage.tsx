@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import EarthModel from '../EarthModel'
 import './Homepage.css'
@@ -6,12 +6,34 @@ import { Canvas } from '@react-three/fiber'
 import { OrbitControls  } from '@react-three/drei'
 import Clouds from './Clouds_bg.svg';
 import Typewriter from 'typewriter-effect';
-import { Space, Spin } from 'antd';
+import { ApiServer } from '../ApiServices/ApiServer'
+import {DbDoc} from '../utils/DbDocType'
+import StatisticComponent from '../components/StatisticComponent'
+
+
+
 
 function Homepage() {
   const navigate = useNavigate()
   const location = useLocation();
+  const [footprintArr, setFootprintArr] = useState<DbDoc[]>([])
 
+  function getCalculatedSoFar() {
+    return footprintArr.reduce((prev: number, current: DbDoc) => {
+      if (current.footprint){
+        return prev + current.footprint;
+      }
+      return prev;
+    }, 0)
+  }
+
+  useEffect(() => {
+    (async () => {
+      const footprintsArray = await ApiServer.getFootprints()
+      console.log(footprintsArray);
+      setFootprintArr(footprintsArray)
+    })();
+  }, [])
 
   return (
     <div className='Homepage'>
@@ -48,6 +70,8 @@ function Homepage() {
         </Canvas>
       </div>
       <img className='background-img' src={Clouds} />
+      
+      <StatisticComponent title='Total CO2 estimated' value={getCalculatedSoFar()} />
     </div>
   )
 }

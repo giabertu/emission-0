@@ -13,4 +13,15 @@ async function postFootprint(req, res) {
   }
 }
 
-module.exports = { postFootprint };
+async function getFootprints(req, res) {
+  try {
+    const footprintArray = await model.getFootprints();
+    console.log("Post to database successful 🍏");
+    res.status(201).json(footprintArray);
+  } catch (error) {
+    console.log("Error posting to database 🍎, ", error);
+    res.sendStatus(400);
+  }
+}
+
+module.exports = { postFootprint, getFootprints };

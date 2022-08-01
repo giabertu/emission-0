@@ -1,4 +1,4 @@
- 
+
 
 export class ApiServer {
 
@@ -19,4 +19,9 @@ export class ApiServer {
     return doc;
   }
 
+  static async getFootprints() {
+    const res = await fetch(`${ApiServer.URL}/footprints`)
+    const footprintsArray = res.json();
+    return footprintsArray; 
+  }
 }

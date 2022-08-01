@@ -6,5 +6,10 @@ async function postFootprint(footprint) {
   console.log("Doc posted: ", doc);
   return doc;
 }
+async function getFootprints() {
+  const docs = await Footprint.find({});
+  console.log("Docs array: ", docs);
+  return docs;
+}
 
-module.exports = { postFootprint };
+module.exports = { postFootprint, getFootprints };

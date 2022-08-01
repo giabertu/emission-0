@@ -3,6 +3,7 @@
   flex-direction: column;
   width: 100vw;
   height: 100vh;
+  position: relative;
 }
 
 .homepage-html {
@@ -27,7 +28,7 @@
   width: 70vw;
   left: 400px;
   z-index: 1;
-  outline: solid 1px;
+/*   outline: solid 1px; */
 }
 
 #title {

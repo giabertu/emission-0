@@ -24,3 +24,29 @@ code {
 button {
   cursor: pointer;
 }
+
+.statistic-card {
+  padding: 10px 10px;
+/*   outline: solid 1px; */
+  position: absolute;
+  background-color: white;
+  box-shadow: 1px 1px 5px rgb(135, 135, 135); 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  bottom: 40px;
+  left: 40px;
+}
+
+.statistic-card p {
+  font-size: 1.1rem;
+  color: gray;
+  border-bottom: solid 1px rgb(171, 171, 171);
+}
+
+.statistic-card h2 {
+  font-size: 1.7rem;
+  color: rgb(7, 137, 7);
+}
