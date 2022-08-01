@@ -33,7 +33,7 @@ function Diet(props: {handleDietChoice: any, handleCheckbox: any, handleConsumpt
       </div>
       <div className='calculator-canvas-div'> 
         <Canvas camera={{position: [0,3, 10]}}>
-          <OrbitControls enableZoom={false} enablePan={false} enableRotate={true}  autoRotate={true} autoRotateSpeed={4.0} target={[0, 0, 0]} /* minPolarAngle={0} maxPolarAngle={0} *//>
+          <OrbitControls enableZoom={false} enablePan={false} enableRotate={true}  autoRotate={true} autoRotateSpeed={4.0} target={[0, 0, 0]} /* enableDamping={true} *//>
             <ambientLight intensity={0.5} />
             <directionalLight
               color={"white"}

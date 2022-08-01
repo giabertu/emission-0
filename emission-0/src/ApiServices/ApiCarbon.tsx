@@ -8,11 +8,7 @@ Table of contents:
     1.1 Travels Api call
     2.2 Electricity Api call
 
-  2. CO2 Offset API
-    2.1 Price call 
-    2.2 Compensate call
-
-  3. Helper functions
+  2. Helper functions
  */
 
 

@@ -19,6 +19,7 @@ import Travels_bg2 from '../../components/Travels/Travels_bg2.svg'
 import { OrbitControls } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 import PlaneModel from "../../PlaneModel"
+import { ApiServer } from "../../ApiServices/ApiServer"
 
 //Unique id for new FlightInfo objects (updated at line 44)
 
@@ -91,13 +92,17 @@ export function Calculator() {
 
   /***********DONE BUTTON STATE LOGIC*********/
   const [tabIndex, setTabIndex] = useState<number>(0)
-  const [showDone, setShowDone] = useState<boolean>(false)
+  const [showCalculate, setshowCalculate] = useState<boolean>(false)
 
   function handleTabChange (index: number) {
     if (index === 2){
-      setShowDone(true);
+      setshowCalculate(true);
     }
     setTabIndex(index);
+  }
+
+  async function postFootprint() {
+    await ApiServer.postFootprint(totalFootprint);
   }
 
   //HELPER FUNCTION
@@ -164,8 +169,8 @@ export function Calculator() {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Link to={'/'} state={{totalFootprint}}>
-        {showDone ? <button id="calculate-button">Calculate</button> : null}
+      <Link to={'/'} onClick={postFootprint} state={{totalFootprint}}>
+        {showCalculate ? <button id="calculate-button">Calculate</button> : null}
       </Link>
     </div>
     </>

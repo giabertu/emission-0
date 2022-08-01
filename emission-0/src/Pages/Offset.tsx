@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import CountUp from 'react-countup';
 import { ApiCarbon } from '../ApiServices/ApiCarbon';
 import { ApiOffset } from '../ApiServices/ApiOffset';
+import { ApiServer } from '../ApiServices/ApiServer';
 import './Offset.css'
 
 function Offset(props: {footprint: number}) {
@@ -11,15 +12,11 @@ function Offset(props: {footprint: number}) {
 
   const [priceEstimate, setPriceEstimate] = useState(0);
   const [checkoutURL, setCheckoutURL] = useState('')
-
-  function handleOffsetClick() {
-
-  }
-
+  
   useEffect(() => {
     (async () => {
       const estimate = await ApiOffset.getPrice(footprint)
-      console.log(estimate)
+      console.log(estimate);
       setPriceEstimate(estimate.priceEUR);
     })()
   }, [])
