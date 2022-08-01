@@ -10,9 +10,7 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
 export function FruitBowlModel(props) {
-  const { nodes, materials } = useGLTF(
-    "../assets/models/fruit_bowl/scene.gltf"
-  );
+  const { nodes, materials } = useGLTF("../assets/models/fruit_bowl/scene.glb");
   return (
     <group {...props} dispose={null} scale={[15, 15, 15]}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
@@ -95,4 +93,4 @@ export function FruitBowlModel(props) {
   );
 }
 
-useGLTF.preload("../assets/models/fruit_bowl/scene.gltf");
+useGLTF.preload("../assets/models/fruit_bowl/scene.glb");

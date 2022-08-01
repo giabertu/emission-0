@@ -50,7 +50,7 @@ function Homepage() {
             }}
             />
           </h2>
-        <button id='start-button' onClick={() => {navigate('/cfp-calculator')}}>Start</button>
+        <button className='call-to-action-button' onClick={() => {navigate('/cfp-calculator')}}>Start</button>
       </div>
 
       <div className='canvas-div'> 
@@ -70,8 +70,9 @@ function Homepage() {
         </Canvas>
       </div>
       <img className='background-img' src={Clouds} />
-      
-      <StatisticComponent title='Total CO2 estimated' value={getCalculatedSoFar()} />
+      <div className='statistics-container'>
+        <StatisticComponent title='Total CO2 estimated' value={getCalculatedSoFar()} suffix='kg'/>
+      </div>
     </div>
   )
 }

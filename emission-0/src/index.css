@@ -25,10 +25,15 @@ button {
   cursor: pointer;
 }
 
+.statistics-container {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+}
+
 .statistic-card {
   padding: 10px 10px;
 /*   outline: solid 1px; */
-  position: absolute;
   background-color: white;
   box-shadow: 1px 1px 5px rgb(135, 135, 135); 
   display: flex;
@@ -36,8 +41,6 @@ button {
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  bottom: 40px;
-  left: 40px;
 }
 
 .statistic-card p {

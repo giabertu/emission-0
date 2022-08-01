@@ -24,4 +24,6 @@ export class ApiServer {
     const footprintsArray = res.json();
     return footprintsArray; 
   }
+
+  
 }

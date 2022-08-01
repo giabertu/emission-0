@@ -4,6 +4,8 @@ import CountUp from 'react-countup';
 import { ApiCarbon } from '../ApiServices/ApiCarbon';
 import { ApiOffset } from '../ApiServices/ApiOffset';
 import { ApiServer } from '../ApiServices/ApiServer';
+import StatisticComponent from '../components/StatisticComponent';
+import { DbDoc } from '../utils/DbDocType';
 import './Offset.css'
 
 function Offset(props: {footprint: number}) {
@@ -12,6 +14,24 @@ function Offset(props: {footprint: number}) {
 
   const [priceEstimate, setPriceEstimate] = useState(0);
   const [checkoutURL, setCheckoutURL] = useState('')
+  const [footprintArr, setFootprintArr] = useState<DbDoc[]>([])
+
+  function getCalculatedSoFar() {
+    return footprintArr.reduce((prev: number, current: DbDoc) => {
+      if (current.footprint){
+        return prev + current.footprint;
+      }
+      return prev;
+    }, 0)
+  }
+
+  useEffect(() => {
+    (async () => {
+      const footprintsArray = await ApiServer.getFootprints()
+      console.log(footprintsArray);
+      setFootprintArr(footprintsArray)
+    })();
+  }, [])
   
   useEffect(() => {
     (async () => {
@@ -30,14 +50,22 @@ function Offset(props: {footprint: number}) {
   }, [])
 
   return (
-    <div className='Offset'>
-      <h1>Your total carbon footprint: <CountUp end={footprint} duration={1.2}/> kg-CO2 emissions</h1> 
-      { priceEstimate ?
-        <div>
-          <p>You can offset your carbon footprint with <span className='price-estimate'>€<CountUp end={priceEstimate} duration={1} delay={1.5}/></span></p>
-          <a href={checkoutURL}><Button type="primary" shape="round" size={'large'}>Offset now</Button></a>
-        </div> : null 
-      }
+    <div id='Offset'>
+      <h1>Results:</h1>
+      {/* <h1>Total carbon footprint: <span className='important-text'><CountUp end={footprint} duration={1.2}/> kg</span> equivalent of CO2 emissions</h1> 
+      <div className='flex-container'>
+        <h2>You can offset your carbon footprint with circa <span className=' important-text price-estimate'>€<CountUp end={priceEstimate} duration={1} delay={1}/></span></h2>
+        <a href={checkoutURL}><Button type="primary" shape="round" size={'large'}>Offset now</Button></a>
+      </div> */}
+      <div className='results-container'>
+        <StatisticComponent title={'Your carbon footprint'} value={footprint} suffix='kg' />
+        <StatisticComponent title={'Offset price estimate'} value={priceEstimate} prefix='€' /> 
+      </div>
+        <a href={checkoutURL}><Button type="primary" shape="round" size={'large'}>Offset now</Button></a>
+
+      <div className='statistics-container'>
+        <StatisticComponent title={'Total CO2 calculated'} value={getCalculatedSoFar()} suffix='kg'/>
+      </div>
     </div>
   )
 }

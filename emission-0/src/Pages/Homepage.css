@@ -43,7 +43,7 @@
   font-size: 2rem;
 }
 
-#start-button {
+.call-to-action-button {
   font-size: 2rem;
   border-style: none;
   border-radius: 30px;
@@ -54,7 +54,7 @@
   transition: all 0.3s ease;
 }
 
-#start-button:hover {
+.call-to-action-button:hover {
   background-color: #0080ff;
   transform: scale(1.1);
 }
