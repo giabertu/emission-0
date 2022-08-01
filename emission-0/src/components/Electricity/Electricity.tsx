@@ -1,13 +1,35 @@
+import { position } from '@chakra-ui/react';
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import React, { Suspense, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import CountryInput from '../../components/Electricity/CountryInput';
 import HouseholdButtons from '../../components/Electricity/HouseholdButtons'
+import { LightBulbModel } from '../../LightBulbModel';
 import './Electricity.css'
 
-function Electricity(props: {handleHouseholdButton: any, handleCountryInput: any}) {
+function Electricity(props: {handleHouseholdButton: any, handleCountryInput: any, electricityState: {bedrooms: number}}) {
 
-  const {handleHouseholdButton, handleCountryInput} = props;
+  const {handleHouseholdButton, handleCountryInput, electricityState} = props;
+  const {bedrooms} = electricityState;
+  const [bulbPositionArray, setBulbPositionArray] = useState<number[][]>([])
+
+  useEffect(() => {
+    setBulbPositionArray(getBulbPositions(bedrooms))
+  }, [bedrooms])
+  
+
+  function getBulbPositions (bedrooms: number) {
+    switch (bedrooms) {
+      case 1:
+        return [[0,0,0]];
+      case 3:
+        return [[-2,0,0], [2,0,0]]
+      case 4:
+        return [[-4,0,0], [0,0,0], [4,0,0]]
+      default:
+        return [[]];
+    }
+  }
 
   return (
     <div className='calculator-component'>
@@ -19,8 +41,8 @@ function Electricity(props: {handleHouseholdButton: any, handleCountryInput: any
         <HouseholdButtons handleHouseholdButton={handleHouseholdButton}/>
       </div>
       <div className='calculator-canvas-div'> 
-        <Canvas camera={{position: [0, 0, 15]}}>
-          <OrbitControls enableZoom={false} enablePan={false} enableRotate={true} target={[0, 0, 0]} /* minPolarAngle={0} maxPolarAngle={0} *//>
+      <Canvas camera={{position: [0,3, 13]}}>
+          <OrbitControls enableZoom={false} enablePan={false} enableRotate={true}  autoRotate={true} autoRotateSpeed={4.0} target={[0, 0, 0]}/>
             <ambientLight intensity={0.5} />
             <directionalLight
               color={"white"}
@@ -29,7 +51,10 @@ function Electricity(props: {handleHouseholdButton: any, handleCountryInput: any
               />
             <Suspense 
             fallback={null}>
-              {/*Missing model  */}
+              { bulbPositionArray.length > 0 ?
+                bulbPositionArray.map((position: any) => {
+                return <LightBulbModel position={position} /> 
+              }) : null}
             </Suspense>
         </Canvas>
       </div>

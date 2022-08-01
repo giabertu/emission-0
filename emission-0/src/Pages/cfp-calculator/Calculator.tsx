@@ -160,7 +160,7 @@ export function Calculator() {
           </TabPanel>
 
           <TabPanel>
-            <Electricity handleHouseholdButton={handleHouseholdButton} handleCountryInput={handleCountryInput}/>
+            <Electricity handleHouseholdButton={handleHouseholdButton} handleCountryInput={handleCountryInput} electricityState={{bedrooms}}/>
           </TabPanel>
         </TabPanels>
       </Tabs>
