@@ -20,6 +20,7 @@ import { OrbitControls } from "@react-three/drei"
 import { Canvas } from "@react-three/fiber"
 import PlaneModel from "../../PlaneModel"
 import { ApiServer } from "../../ApiServices/ApiServer"
+import { motion } from "framer-motion"
 
 //Unique id for new FlightInfo objects (updated at line 44)
 
@@ -145,7 +146,10 @@ export function Calculator() {
   
   return (
     <>
-    <div id='Calculator'>
+    <motion.div 
+    initial={{opacity: 0}}
+    whileInView={{opacity: 1}}
+    id='Calculator'>
 {/*       {tabIndex === 1 ? 
         <img src={Travels_bg2} className='background-img spotlight' /> : null } */}
 
@@ -173,7 +177,7 @@ export function Calculator() {
       <Link to={'/'} onClick={postFootprint} state={{totalFootprint}}>
         {showCalculate ? <button id="calculate-button">Calculate</button> : null}
       </Link>
-    </div>
+    </motion.div>
     </>
   )
 }

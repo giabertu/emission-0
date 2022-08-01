@@ -1,6 +1,7 @@
 import { Button } from 'antd';
 import React, { useEffect, useState } from 'react'
 import CountUp from 'react-countup';
+import { useNavigate } from 'react-router-dom';
 import { ApiCarbon } from '../ApiServices/ApiCarbon';
 import { ApiOffset } from '../ApiServices/ApiOffset';
 import { ApiServer } from '../ApiServices/ApiServer';
@@ -15,6 +16,7 @@ function Offset(props: {footprint: number}) {
   const [priceEstimate, setPriceEstimate] = useState(0);
   const [checkoutURL, setCheckoutURL] = useState('')
   const [footprintArr, setFootprintArr] = useState<DbDoc[]>([])
+  const navigate = useNavigate();
 
   function getCalculatedSoFar() {
     return footprintArr.reduce((prev: number, current: DbDoc) => {
@@ -61,11 +63,15 @@ function Offset(props: {footprint: number}) {
         <StatisticComponent title={'Your carbon footprint'} value={footprint} suffix='kg' />
         <StatisticComponent title={'Offset price estimate'} value={priceEstimate} prefix='€' /> 
       </div>
+      <div className='flex-container button-container'>
         <a href={checkoutURL}><Button type="primary" shape="round" size={'large'}>Offset now</Button></a>
-
-      <div className='statistics-container'>
-        <StatisticComponent title={'Total CO2 calculated'} value={getCalculatedSoFar()} suffix='kg'/>
+        <Button type="primary" shape="round" size={'large'} onClick={() => {
+          navigate('/')
+        }}>Back home</Button>
       </div>
+{/*       <div className='statistics-container'>
+        <StatisticComponent title={'Total CO2 calculated'} value={getCalculatedSoFar()} suffix='kg'/>
+      </div> */}
     </div>
   )
 }

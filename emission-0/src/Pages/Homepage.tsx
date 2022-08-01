@@ -9,6 +9,7 @@ import Typewriter from 'typewriter-effect';
 import { ApiServer } from '../ApiServices/ApiServer'
 import {DbDoc} from '../utils/DbDocType'
 import StatisticComponent from '../components/StatisticComponent'
+import { motion } from 'framer-motion'
 
 
 
@@ -36,7 +37,12 @@ function Homepage() {
   }, [])
 
   return (
-    <div className='Homepage'>
+    <motion.div 
+    initial={{opacity: 0}}
+    animate={{opacity: 1}}
+    exit={{opacity: 0}}
+/*     whileInView={{opacity: 1}} */
+    className='Homepage'>
 
       <div className='homepage-html'>
         <h1 id='title'>eMission 0</h1>
@@ -73,7 +79,7 @@ function Homepage() {
       <div className='statistics-container'>
         <StatisticComponent title='Total CO2 estimated' value={getCalculatedSoFar()} suffix='kg'/>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

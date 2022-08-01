@@ -9,6 +9,7 @@ import { MeatModel } from '../../MeatModel';
 import { DietChoiceModel } from '../../OmnivoreModel';
 import { CoffeeModel } from '../../CoffeeModel';
 import { FruitBowlModel } from '../../FruitBowlModel';
+import { AnimatePresence, motion } from 'framer-motion';
 
 
 
@@ -24,13 +25,20 @@ function Diet(props: {handleDietChoice: any, handleCheckbox: any, handleConsumpt
 
   return (
     <div className='calculator-component'>
-      <div className='calculator-html'>
- {/*        <h1>Diet</h1> */}
-        <h2>Choose your diet:</h2>
-        <DietButtons handleDietChoice={handleDietChoice} /> 
-        <Checkbox onChange={handleCheckbox}><span className='checkbox'>Coffee drinker <span id='coffee-emoji'>☕</span></span></Checkbox>
-        <ConsumptionInput handleConsumption={handleConsumption} dietChoice={dietChoice}/>
-      </div>
+      <AnimatePresence>
+        <motion.div 
+        initial={{opacity: 0}}
+        animate={{opacity: 1}}
+        exit={{opacity: 0}}
+        className='calculator-html'>
+          <h2>Choose your diet:</h2>
+          <DietButtons handleDietChoice={handleDietChoice} /> 
+          <Checkbox onChange={handleCheckbox}><span className='checkbox'>Coffee drinker <span id='coffee-emoji'>☕</span></span></Checkbox>
+          <ConsumptionInput handleConsumption={handleConsumption} dietChoice={dietChoice}/>
+        </motion.div>
+      </AnimatePresence>
+
+
       <div className='calculator-canvas-div'> 
         <Canvas camera={{position: [0,3, 10]}}>
           <OrbitControls enableZoom={false} enablePan={false} enableRotate={true}  autoRotate={true} autoRotateSpeed={4.0} target={[0, 0, 0]} /* enableDamping={true} *//>
