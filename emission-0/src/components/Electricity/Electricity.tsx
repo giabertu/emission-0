@@ -13,9 +13,9 @@ function Electricity(props: {handleHouseholdButton: any, handleCountryInput: any
     <div className='calculator-component'>
       <div className='calculator-html'>
         {/* <h1>Electricity</h1> */}
-        <h2>In which country do you live in?</h2>
+        <h2>Choose your country:</h2>
         <CountryInput handleCountryInput={handleCountryInput}/>
-        <h2>How many bedrooms does the house you live in have?</h2>
+        <h2 className='el-h2'>How many bedrooms does the house you live in have?</h2>
         <HouseholdButtons handleHouseholdButton={handleHouseholdButton}/>
       </div>
       <div className='calculator-canvas-div'> 

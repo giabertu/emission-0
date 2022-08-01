@@ -1,0 +1,11 @@
+Model Information:
+* title:	Fruit Basket - CyTokry
+* source:	https://sketchfab.com/3d-models/fruit-basket-cytokry-66a53bc0b1014574b116fe4e72a5d94d
+* author:	Francesco Coldesina (https://sketchfab.com/topfrank2013)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Fruit Basket - CyTokry" (https://sketchfab.com/3d-models/fruit-basket-cytokry-66a53bc0b1014574b116fe4e72a5d94d) by Francesco Coldesina (https://sketchfab.com/topfrank2013) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

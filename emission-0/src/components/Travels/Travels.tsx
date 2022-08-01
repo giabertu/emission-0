@@ -17,7 +17,7 @@ function Travels(props: {handleAddFlight: any, handleRemoveFlight: any, handleIn
       <div className='calculator-html'>
         {/* <h1>Travels</h1> */}
         <h2>Add flights you took in the past year</h2>
-        <button id='add-flight-button'onClick={handleAddFlight}>Add flight</button>
+        <button className='calculator-button' onClick={handleAddFlight}>Add flight</button>
         {inputArray.length > 0 ? inputArray.map((flightInfo: FlightInfo) => 
           <AirportInput key={flightInfo.id} handleRemoveFlight={handleRemoveFlight} flightInfo={flightInfo} handleInputSelect={handleInputSelect}/>
           ) : null}

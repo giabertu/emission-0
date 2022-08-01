@@ -12,10 +12,10 @@ function ConsumptionInput(props : {dietChoice: string, handleConsumption: any}) 
   return (
     <>
     {dietChoice !== 'Vegan' && dietChoice !== '' ? 
-      <>
+      <div id='consumption-input-container'>
         <h3><span className='cheese-and-meat'>Dairy {dietChoice == 'Omnivore' ? <>and meat</> : null}</span> weekly consumption: </h3>
-        <InputNumber onChange={handleConsumption} min={0} max={150000} onStep={() => {}} step={50} addonAfter={'g'} defaultValue={100} />
-      </> : null
+        <InputNumber className='diet-input' onChange={handleConsumption} min={0} max={150000} onStep={() => {}} step={50} addonAfter={'g'} defaultValue={100} />
+        </div> : null
     }
     </>
   )

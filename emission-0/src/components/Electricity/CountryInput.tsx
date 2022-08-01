@@ -14,8 +14,10 @@ function CountryInput(props: {handleCountryInput: any}) {
   const {handleCountryInput} = props;
 
   return (
-    <div className='CountryInput'>
+    <div id='country-input-container'>
     <AutoComplete 
+      className='country-autocomplete'
+      dropdownClassName='country-dropdown'
       allowClear={true}
       style={{ width: 200 }}
       options={options}

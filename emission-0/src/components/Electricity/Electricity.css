@@ -1,0 +1,15 @@
+.el-buttons {
+  display: flex;
+  gap: 30px;
+  transform: scale(1.2);
+}
+
+.el-h2 {
+  text-align: center;
+  padding: 0px 30px;
+}
+
+.country-autocomplete {
+  transform: scale(1.2);
+/*   width: 300px; */
+}

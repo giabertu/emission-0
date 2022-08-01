@@ -12,14 +12,6 @@
   font-weight: 700
 }
 
-#Diet {
-  padding: 30px;
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  background-color: white;
-}
-
 .radio-group {
   transform: scale(1.2);
   font-size: 2rem;
@@ -27,4 +19,17 @@
 
 .checkbox {
   font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+#coffee-emoji {
+  transform: scale(1.5);
+}
+
+#consumption-input-container {
+  transform: scale(1.2);
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 20px;
 }

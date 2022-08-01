@@ -2,7 +2,8 @@ import { AutoComplete } from 'antd';
 import React, { useEffect, useState } from 'react';
 import {DataUtil} from '../../utils/DataUtil'
 import './AirportInput.css'
-import {FlightInfo} from '../../utils/FlightInfo'
+import {FlightInfo} from '../../utils/FlightInfo';
+import {AiOutlineClose} from 'react-icons/ai';
 
 const data = DataUtil.getCitiesAndCodes();
 const options = [
@@ -29,7 +30,7 @@ function AirportInput (props: {handleRemoveFlight: any, flightInfo: FlightInfo, 
     />
     <AutoComplete
       allowClear={true}
-      style={{ width: 200 }}
+      style={{ width: 200}}
       options={options}
       onSelect={(value: string) => handleInputSelect('to', value, flightInfo)}
       placeholder="Arrival Airport"
@@ -37,7 +38,8 @@ function AirportInput (props: {handleRemoveFlight: any, flightInfo: FlightInfo, 
         option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
       }
     />
-    <button onClick={() => handleRemoveFlight(flightInfo)}>x</button>
+    <button className='del-flight-button' onClick={() => handleRemoveFlight(flightInfo)}><AiOutlineClose/>
+      </button>
     </div>
   )
 }

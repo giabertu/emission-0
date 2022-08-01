@@ -152,7 +152,7 @@ export function Calculator() {
 
         <TabPanels>
           <TabPanel>
-            <Diet handleDietChoice={handleDietChoice} handleCheckbox={handleCheckbox} handleConsumption={handleConsumption} dietChoice={dietChoice}/>
+            <Diet handleDietChoice={handleDietChoice} handleCheckbox={handleCheckbox} handleConsumption={handleConsumption} dietState={{dietChoice, coffeeDrinker, consumption}}/>
           </TabPanel>
 
           <TabPanel>
@@ -165,7 +165,7 @@ export function Calculator() {
         </TabPanels>
       </Tabs>
       <Link to={'/'} state={{totalFootprint}}>
-        {showDone ? <Button type="primary" shape="round" size={'large'}>Done</Button> : null}
+        {showDone ? <button id="calculate-button">Calculate</button> : null}
       </Link>
     </div>
     </>

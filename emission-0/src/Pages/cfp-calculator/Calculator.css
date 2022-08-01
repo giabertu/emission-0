@@ -1,7 +1,7 @@
 .tab {
   background-color: transparent; 
   border-style: none;
-  padding: 5px 30px;
+  padding: 5px 25px;
   margin: 10px;
   border-radius: 30px;
   font-size: 1.2rem;
@@ -51,20 +51,47 @@
 
 .calculator-canvas-div {
   margin-top: 20px;
-  width: 500px;
-  height: 500px;
+  width: 450px;
+  height: 450px; /* it was 500 before (width and height) */
   border-radius: 250px;
   box-shadow: 1px 1px 10px rgb(135, 135, 135); 
 }
 
 .calculator-html {
-  outline: solid 1px;
+/*   outline: solid 1px; */
   z-index: 2;
   display: flex;
   flex-direction: column;
-  width: 450px;
+  width: 500px;
   gap: 30px;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  box-shadow: 1px 1px 10px rgb(135, 135, 135); 
+}
+
+/* add flight, household buttons */
+.calculator-button {
+  border-style: none;
+  width: fit-content;
+  padding: 5px 25px;
+  border-radius: 30px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #0080ff;
+  box-shadow: 1px 1px 1px rgb(135, 135, 135);
+  transition: all 0.3s ease;
+}
+
+.calculator-button:hover {
+  background-color: #00aeff; 
+}
+
+#calculate-button {
+  border-style: none;
+  background-color: rgb(124, 255, 124);
+  width: fit-content;
+  padding: 0px 15px;
+  font-size: 2rem;
+  border-radius: 25px;
 }

@@ -12,18 +12,6 @@
   gap: 30px;
   justify-content: center;
 }
-
-#add-flight-button {
-  border-style: none;
-  width: fit-content;
-  padding: 5px 30px;
-  border-radius: 30px;
-  font-size: 1.2rem;
-  color: white;
-  background-color: #0080ff;
-  box-shadow: 1px 1px 1px rgb(135, 135, 135);
-}
-
 #add-flight-button:hover {
 
 }

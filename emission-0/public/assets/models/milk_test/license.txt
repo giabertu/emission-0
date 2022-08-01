@@ -1,0 +1,11 @@
+Model Information:
+* title:	Milk test
+* source:	https://sketchfab.com/3d-models/milk-test-4f8003c35c13451eaf176ba3e44de20b
+* author:	eyes360vr (https://sketchfab.com/eyes360vr)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Milk test" (https://sketchfab.com/3d-models/milk-test-4f8003c35c13451eaf176ba3e44de20b) by eyes360vr (https://sketchfab.com/eyes360vr) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

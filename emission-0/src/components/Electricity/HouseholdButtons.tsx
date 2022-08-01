@@ -8,19 +8,19 @@ function HouseholdButtons(props: {handleHouseholdButton : any}) {
   const { handleHouseholdButton } = props;
 
   return (
-    <div>
-      <Button type="primary" shape="round" size={size} 
+    <div className='el-buttons'>
+      <button className='calculator-button' 
       onClick={(e) => handleHouseholdButton(e)}>
         1-2
-      </Button>
-      <Button type="primary" shape="round" size={size} 
+      </button>
+      <button className='calculator-button' 
       onClick={(e) => handleHouseholdButton(e)}>
         3-4
-      </Button>
-      <Button type="primary" shape="round" size={size} 
+      </button>
+      <button className='calculator-button' 
       onClick={(e) => handleHouseholdButton(e)}>
         4+
-      </Button> 
+      </button>
     </div>
   )
 }
