@@ -111,6 +111,7 @@ export function Calculator() {
       message: 'Error',
       description:
         'Please make sure that all input fields are filled out correctly.',
+      maxCount: 2
     });
   };
 

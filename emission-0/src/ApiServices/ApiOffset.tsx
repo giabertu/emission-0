@@ -13,7 +13,7 @@ export class ApiOffset {
     //Therefore, we convert the CO2 value that we have to kwh.
     const kwh = ApiOffset.calcKwhFromCO2(footprint);
     
-    const res = await fetch(`${ApiOffset.BASE_URL}/co2/price?c02=1&kwh=${kwh}`)
+    const res = await fetch(`${ApiOffset.BASE_URL}/co2/price?c02=${footprint * 1000}&kwh=${kwh}`)
     const estimate = await res.json();
     return estimate;
   }
@@ -21,7 +21,7 @@ export class ApiOffset {
   static async getCompensate(footprint: number) {
     const kwh = ApiOffset.calcKwhFromCO2(footprint);
     
-    const res = await fetch(`${ApiOffset.BASE_URL}/co2/compensate?c02=1&kwh=${kwh}`)
+    const res = await fetch(`${ApiOffset.BASE_URL}/co2/compensate?c02=${footprint * 1000}&kwh=${kwh}`)
     const estimate = await res.json();
     return estimate; 
   }

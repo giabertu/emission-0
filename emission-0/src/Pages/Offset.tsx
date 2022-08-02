@@ -1,4 +1,5 @@
 import { Button } from 'antd';
+import { motion } from 'framer-motion';
 import  { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { ApiOffset } from '../ApiServices/ApiOffset';
@@ -126,7 +127,11 @@ function Offset(props: {footprint: {dietFootprint : number, travelsFootprint: nu
   }, [])
 
   return (
-    <div id='Offset'>
+    <motion.div 
+    initial={{opacity: 0}}
+    animate={{opacity: 1}}
+    exit={{opacity: 0}}
+    id='Offset'>
       <h1>Results:</h1>
       <div className='res-statistics-container'>
         <div className='results-container'>
@@ -136,13 +141,13 @@ function Offset(props: {footprint: {dietFootprint : number, travelsFootprint: nu
         </div>
           <StatisticComponent title={'Footprint distribution'} value={0} pieChart={true} data={getPieChartData()}/>
       </div>
-      <div className='flex-container button-container'>
+      <motion.div className='flex-container button-container'>
         <a href={checkoutURL}><Button type="primary" shape="round" size={'large'}>Offset now</Button></a>
         <Button type="primary" shape="round" size={'large'} onClick={() => {
           navigate('/')
         }}>Back home</Button>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }
 

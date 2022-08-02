@@ -18,7 +18,8 @@ function AirportInput (props: {handleRemoveFlight: any, flightInfo: FlightInfo, 
   console.log(flightInfo)
   return (
     <div className='AirportInput'>
-    <AutoComplete 
+    <AutoComplete
+      backfill={true} 
       allowClear={true}
       style={{ width: 200 }}
       options={options}
