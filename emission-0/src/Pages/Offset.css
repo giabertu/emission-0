@@ -42,8 +42,18 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
+  gap: 1rem;
+  max-width: 26.1rem;
+  align-items: center;
+  margin: 0rem 0rem;
+}
+
+.res-statistics-container {
+  display: flex;
   transform: scale(1.2);
+  justify-content: center;
+  align-items: center;
+  gap: 1rem
 }
 
 .button-container {
