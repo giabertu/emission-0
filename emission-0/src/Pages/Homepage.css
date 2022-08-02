@@ -1,11 +1,12 @@
 .Homepage {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   width: 100vw;
   height: 100vh;
   position: relative;
   background-image: url('./Clouds_bg.svg');
-  background-size: 100% auto; /* Fill width, retain proportions */
+  background-size: cover; /* Fill width, retain proportions */
 }
 
 .homepage-html {
@@ -27,8 +28,8 @@
 .canvas-div {
   position: absolute;
   height: 100vh;
-  width: 70vw;
-  left: 400px;
+  width: 65vw;
+  left: 28rem;
   z-index: 1;
 /*   outline: solid 1px; */
 }
