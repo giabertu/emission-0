@@ -4,7 +4,7 @@
 
 #Offset {
   background-image: url(./Clouds_bg.svg);
-  background-size: 100% auto;
+  background-size: cover;
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -34,11 +34,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .results-container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
   transform: scale(1.2);
 }

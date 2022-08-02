@@ -1,21 +1,21 @@
 .tab {
   background-color: transparent; 
   border-style: none;
-  padding: 5px 25px;
-  margin: 10px;
-  border-radius: 30px;
-  font-size: 1.2rem;
+  padding: 5px 20px;
+  margin-right: 1rem;
+  border-radius: 5px;
+  font-size: 1.3rem;
   transition: all 0.2s ease;
-  margin-top: 50px;
 }
 .tab:hover {
-  transform: scale(1.2);
+/*   transform: scale(1.2); */
+ color: rgb(58, 58, 58);
 }
 
 .selected-tab {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
-  transform: scale(1.2);
+/*   transform: scale(1.2); */
 }
 
 .spotlight {
@@ -28,10 +28,12 @@
   width: 100vw;
   height: 100vh;
   background-image: url("../../components/Travels/Travels_bg2.svg");
+  background-size: 100% contain;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
+  gap: 2rem;
 }
 
 #Calculator h1, #Calculator h2 {
@@ -84,14 +86,16 @@
 }
 
 .calculator-button:hover {
-  background-color: #00aeff; 
+  background-color: #00aeff;
+}
+
+
+#calculate-button:hover {
+  background-color: #00aeff;
 }
 
 #calculate-button {
-  border-style: none;
-  background-color: rgb(124, 255, 124);
-  width: fit-content;
-  padding: 0px 15px;
-  font-size: 2rem;
-  border-radius: 25px;
+  color: rgb(57, 57, 57);
+  background-color: white;
+  transform: scale(1.4);
 }

@@ -175,7 +175,7 @@ export function Calculator() {
         </TabPanels>
       </Tabs>
       <Link to={'/'} onClick={postFootprint} state={{totalFootprint}}>
-        {showCalculate ? <button id="calculate-button">Calculate</button> : null}
+        {showCalculate ? <Button id='calculate-button' type="primary" shape="round" size={'large'}>Calculate</Button> : null}
       </Link>
     </motion.div>
     </>
