@@ -4,6 +4,7 @@
 
 #Offset {
   background-image: url(./Clouds_bg.svg);
+  background-size: 100% auto;
   height: 100vh;
   width: 100vw;
   display: flex;

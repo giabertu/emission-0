@@ -4,6 +4,8 @@
   width: 100vw;
   height: 100vh;
   position: relative;
+  background-image: url('./Clouds_bg.svg');
+  background-size: 100% auto; /* Fill width, retain proportions */
 }
 
 .homepage-html {
