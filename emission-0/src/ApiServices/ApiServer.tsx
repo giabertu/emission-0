@@ -2,7 +2,7 @@
 
 export class ApiServer {
 
-  static URL = `http://127.0.0.1:3005`
+  static URL = `https://emission-0-server.herokuapp.com`
 
   constructor() {}
 
