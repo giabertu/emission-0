@@ -22,14 +22,39 @@ function Offset(props: {footprint: {dietFootprint : number, travelsFootprint: nu
   const [footprintArr, setFootprintArr] = useState<DbDoc[]>([])
   const navigate = useNavigate();
 
-  /* function getCalculatedSoFar() {
+  function getCalculatedSoFar() {
     return footprintArr.reduce((prev: number, current: DbDoc) => {
       if (current.footprint){
         return prev + current.footprint;
       }
       return prev;
     }, 0)
-  } */
+  }
+
+  function getAverageFootprint() {
+    console.log('average footprint: ', getCalculatedSoFar() / footprintArr.length)
+    return getCalculatedSoFar() / footprintArr.length;
+  }
+
+  function getPercentage() {
+    const initialPerc = ((dietFootprint + travelsFootprint + electricityFootprint) / getAverageFootprint()) * 100;
+    console.log('Initial percentage ', initialPerc)
+    if (initialPerc >= 100) {
+      return ['up', Math.round(initialPerc) - 100]
+    } else {
+      const diff = 100 - initialPerc;
+      return ['down', diff]
+    }
+  }
+  function getPercentageValue(): number | string {
+    const array = getPercentage();
+    console.log('Value: ', array[1])
+    return array[1];
+  }
+  function getPercentageOrientation() {
+    return getPercentage()[0]
+  }
+
   function getPieChartData() {
     let arr: {title: string, value: number, color: string}[] = [];
     let [dietColor, travelsColor, electricityColor] = ['', '', '']
@@ -111,6 +136,7 @@ function Offset(props: {footprint: {dietFootprint : number, travelsFootprint: nu
         <div className='results-container'>
           <StatisticComponent title={'Your carbon footprint'} value={dietFootprint +travelsFootprint+electricityFootprint} suffix='kg' />
           <StatisticComponent title={'Offset price estimate'} value={priceEstimate} prefix='€' />
+          <StatisticComponent title={'Compared to average'} value={getPercentageValue()} prefix={getPercentageOrientation() === 'up' ? '⬆️' : '⬇️'} className={getPercentageOrientation() === 'up' ? ' red-statistic' : '' } suffix='%' />
         </div>
           <StatisticComponent title={'Footprint distribution'} value={0} pieChart={true} data={getPieChartData()}/>
       </div>

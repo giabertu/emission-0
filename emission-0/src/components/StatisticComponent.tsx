@@ -4,9 +4,9 @@ import React from 'react';
 import CountUp from 'react-countup';
 import { PieChart } from 'react-minimal-pie-chart';
 
-function StatisticComponent(props: {title: string, value: number, prefix?: string, suffix?: string, pieChart?: boolean, data?: {title: string, value: number, color: string}[]}) {
+function StatisticComponent(props: {title: string, value: number | string, prefix?: string, suffix?: string, className?: string,  pieChart?: boolean, data?: {title: string, value: number, color: string}[]}) {
 
-  const {title, value, prefix, suffix, pieChart, data} = props;
+  const {title, value, prefix, suffix, className, pieChart, data} = props;
   console.log(data)
   const defaultLabelStyle = {
     fontSize: '5px',
@@ -14,10 +14,10 @@ function StatisticComponent(props: {title: string, value: number, prefix?: strin
   };
 
   return (
-      <div className='statistic-card'>
+      <div className={className ? 'statistic-card' + className : 'statistic-card'}>
         <p>{title}</p>
         { !pieChart ? 
-          <h2>{prefix ? prefix: '' } <CountUp end={value} separator={','} start={0} duration={1} delay={0}/> {suffix ? suffix : '' }</h2> 
+          <h2>{prefix ? prefix: '' } <CountUp end={+value} separator={','} start={0} duration={1} delay={0}/> {suffix ? suffix : '' }</h2> 
           :
           <PieChart className='pie-chart'
           data={data}

@@ -57,3 +57,7 @@ button {
 .pie-chart {
   width: 12.2rem;
 }
+
+.red-statistic h2 {
+  color: rgb(154, 0, 0)
+}
