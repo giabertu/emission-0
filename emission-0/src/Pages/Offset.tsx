@@ -1,10 +1,6 @@
-import { Stat } from '@chakra-ui/react';
 import { Button } from 'antd';
-import React, { useEffect, useState } from 'react'
-import CountUp from 'react-countup';
+import  { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { getEnabledCategories } from 'trace_events';
-import { ApiCarbon } from '../ApiServices/ApiCarbon';
 import { ApiOffset } from '../ApiServices/ApiOffset';
 import { ApiServer } from '../ApiServices/ApiServer';
 import StatisticComponent from '../components/StatisticComponent';
@@ -136,7 +132,7 @@ function Offset(props: {footprint: {dietFootprint : number, travelsFootprint: nu
         <div className='results-container'>
           <StatisticComponent title={'Your carbon footprint'} value={dietFootprint +travelsFootprint+electricityFootprint} suffix='kg' />
           <StatisticComponent title={'Offset price estimate'} value={priceEstimate} prefix='€' />
-          <StatisticComponent title={'Compared to average'} value={getPercentageValue()} prefix={getPercentageOrientation() === 'up' ? '⬆️' : '⬇️'} className={getPercentageOrientation() === 'up' ? ' red-statistic' : '' } suffix='%' />
+          <StatisticComponent title={'Compared to average'} value={getPercentageValue()} prefix={getPercentageOrientation() === 'up' ? '↑' : '⬇️'} className={getPercentageOrientation() === 'up' ? ' red-statistic' : '' } suffix='%' />
         </div>
           <StatisticComponent title={'Footprint distribution'} value={0} pieChart={true} data={getPieChartData()}/>
       </div>

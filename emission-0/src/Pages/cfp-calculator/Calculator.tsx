@@ -12,10 +12,11 @@ import { CheckboxChangeEvent } from "antd/lib/checkbox";
 import { FlightInfo } from "../../utils/FlightInfo";
 import {ApiCarbon} from '../../ApiServices/ApiCarbon'
 import uniqid from 'uniqid'
-import { Button } from "antd";
+import { Button, notification } from "antd";
 import { Link } from "react-router-dom";
 import { ApiServer } from "../../ApiServices/ApiServer"
 import { motion } from "framer-motion"
+
 
 //Unique id for new FlightInfo objects (updated at line 44)
 
@@ -89,7 +90,29 @@ export function Calculator() {
 
   /***********DONE BUTTON STATE LOGIC*********/
   const [tabIndex, setTabIndex] = useState<number>(0)
-  const [showCalculate, setshowCalculate] = useState<boolean>(false)
+  const [showCalculate, setshowCalculate] = useState<boolean>(false);
+  const [canCalculate, setCanCalculate] = useState<boolean>(false);
+
+  function canCalculateSetter() {
+    if (dietChoice == '' || country == '' || bedrooms == 0) return;
+    let can = true;
+    inputArray.forEach((flight) => {
+      if (flight.from && flight.to){
+        return;
+      } else {
+        can = false;
+      }
+    })
+    setCanCalculate(can)
+  }
+
+  const openNotification = () => {
+    notification.error({
+      message: 'Error',
+      description:
+        'Please make sure that all input fields are filled out correctly.',
+    });
+  };
 
   function handleTabChange (index: number) {
     if (index === 2){
@@ -110,8 +133,8 @@ export function Calculator() {
 
   //Everytime state changes, recaulculate footprint
   useEffect(() => {
-
     calcAndSetFootprint();
+    canCalculateSetter();
   }, [dietChoice, coffeeDrinker, consumption])
 
   useEffect(() => {
@@ -121,6 +144,7 @@ export function Calculator() {
         const {carbon_kg} = estimate.data.attributes;
         setTravelsFootprint(Math.floor(carbon_kg));
         calcAndSetFootprint();
+        canCalculateSetter();
       }
     })(); 
   }, [inputArray])
@@ -133,8 +157,10 @@ export function Calculator() {
         const {carbon_kg} = estimate.data.attributes;
         setElectricityFootprint(Math.floor(carbon_kg))
         calcAndSetFootprint();
+        canCalculateSetter()
       }
     })();
+
   }, [bedrooms, country])
   
   return (
@@ -167,7 +193,9 @@ export function Calculator() {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Link to={'/'} onClick={postFootprint} state={{data: {dietFootprint, travelsFootprint, electricityFootprint}}}>
+      <Link to={canCalculate ? '/' : '/cfp-calculator'} 
+        onClick={() => canCalculate ? postFootprint() : openNotification()}
+        state={{data: {dietFootprint, travelsFootprint, electricityFootprint}}}>
         <div className='calc-button-container'>
            {showCalculate ? <Button id='calculate-button' type="primary" shape="round" size={'large'}>Calculate</Button> : null}
         </div>
