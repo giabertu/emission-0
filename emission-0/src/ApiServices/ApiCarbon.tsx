@@ -33,8 +33,6 @@ export class ApiCarbon {
         passangers: '1',
         legs: legsArray
       }
-      console.log('Here is the data object: ', data)
-      console.log('Here is the api key: ', ApiCarbon.API_KEY)
       const postReq = await fetch(`${ApiCarbon.CARB_INT_URL}/estimates`, {
         method: 'POST',
         headers: ApiCarbon.HEADERS_CONFIG, 
@@ -47,7 +45,6 @@ export class ApiCarbon {
   /***ELECTRICITY API CALL ***/
   static async postElectricity(electricityInfo: {bedrooms: number, country: string}) {
     const {bedrooms, country} = electricityInfo;
-    console.log('Here is the api key: ', ApiCarbon.API_KEY)
     if (bedrooms && country) {
       let usagekWh = 0;
       switch (electricityInfo.bedrooms) {
@@ -70,8 +67,6 @@ export class ApiCarbon {
         electricity_value: usagekWh,
         country: electricityInfo.country
       }
-
-      console.log('Here is the body of the post request for Electricity: ', data)
   
       const res = await fetch(`${ApiCarbon.CARB_INT_URL}/estimates`, {
         method: 'POST',

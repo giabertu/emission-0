@@ -5,9 +5,8 @@ import Homepage from './Homepage';
 import Offset from './Offset';
 
 function LandingPage() {
-  const [footprint, setFootprint] = useState<number | undefined>(undefined)
   const location = useLocation();
-  const data: {totalFootprint: number} = location.state as {totalFootprint: number};
+  const data: {data: {dietFootprint: number, travelsFootprint: number, electricityFootprint: number}} = location.state as {data: {dietFootprint: number, travelsFootprint: number, electricityFootprint: number}};
 
   
   //Logic to pass carbon footprint calculation to homepage.
@@ -15,7 +14,7 @@ function LandingPage() {
   return (
     <>
     { data ?
-      <Offset footprint={data.totalFootprint}/> :
+      <Offset footprint={data.data}/> :
       <Homepage/>
     }    
     </>

@@ -1,9 +1,9 @@
 
 export class Carbon {
-  static diet: number = 0;
+/*   static diet: number = 0;
   static travels: number = 0;
   static electricity: number = 0;
-
+ */
   constructor() {}
 
   //not setting them 'possibly undefined' because they are defined with default values.
@@ -43,23 +43,8 @@ export class Carbon {
       const coffeeCarbonFootprint = yearlyCoffeeConsumptionKg * 17;
       yearlyCarbonFootprintKg += coffeeCarbonFootprint;
     }
-    Carbon.diet = Math.floor(yearlyCarbonFootprintKg);
-    return Carbon.diet;
-
+    return Math.floor(yearlyCarbonFootprintKg);
   }
 
-  static calcTravelsFootprint(carbon_kg: number) {
-    Carbon.travels = carbon_kg;
-    return Carbon.travels;
-  }
-
-  static calcElectricityFootprint(carbon_kg: number) {
-    Carbon.electricity = carbon_kg;
-    return Carbon.electricity;
-  }
-
-  static calcTotalFootprint() {
-    return Carbon.electricity + Carbon.diet + Carbon.travels;
-  }
 
 }

@@ -62,7 +62,6 @@ function Homepage() {
       <div className='canvas-div'> 
         <Canvas camera={{position: [0, 95, 8]}}>
           <OrbitControls enableZoom={false} enablePan={false} autoRotate={true} enableRotate={true} target={[30, -5, 0]} minPolarAngle={0} maxPolarAngle={0}/>
-            {/* <PerspectiveCamera position={[0,200,200]}/> */}
             <ambientLight intensity={0.5} />
             <directionalLight
               color={"white"}
@@ -75,7 +74,6 @@ function Homepage() {
             </Suspense>
         </Canvas>
       </div>
-    {/*   <img className='background-img' src={Clouds} /> */}
       <div className='statistics-container'>
         <StatisticComponent title='Total CO2 estimated' value={getCalculatedSoFar()} suffix='kg'/>
       </div>

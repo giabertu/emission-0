@@ -14,11 +14,6 @@ import {ApiCarbon} from '../../ApiServices/ApiCarbon'
 import uniqid from 'uniqid'
 import { Button } from "antd";
 import { Link } from "react-router-dom";
-import Travels_bg from '../../components/Travels/Travels_bg.svg'
-import Travels_bg2 from '../../components/Travels/Travels_bg2.svg'
-import { OrbitControls } from "@react-three/drei"
-import { Canvas } from "@react-three/fiber"
-import PlaneModel from "../../PlaneModel"
 import { ApiServer } from "../../ApiServices/ApiServer"
 import { motion } from "framer-motion"
 
@@ -27,7 +22,9 @@ import { motion } from "framer-motion"
 export function Calculator() {
  
   /***********TOTAL FOOTPRINT STATE LOGIC ***********/
-  const [totalFootprint, setTotalFootprint] = useState(0)
+  const [dietFootprint, setDietFootprint] = useState(0);
+  const [travelsFootprint, setTravelsFootprint] = useState(0);
+  const [electricityFootprint, setElectricityFootprint] = useState(0)
 
   /***********DIET STATE LOGIC ***********/
   const [dietChoice, setDietChoice] = useState('')
@@ -83,7 +80,6 @@ export function Calculator() {
   const [bedrooms, setBedrooms] = useState<number>(0);
 
   function handleHouseholdButton (e: React.MouseEvent<HTMLButtonElement>) {
-    console.log(e.currentTarget.innerText)
     setBedrooms(Number(e.currentTarget.innerText[0]))
   }
 
@@ -103,18 +99,18 @@ export function Calculator() {
   }
 
   async function postFootprint() {
-    await ApiServer.postFootprint(totalFootprint);
+    await ApiServer.postFootprint(dietFootprint + travelsFootprint + electricityFootprint);
   }
 
   //HELPER FUNCTION
   function calcAndSetFootprint() {
-    Carbon.calcDietFooprint({dietChoice, coffeeDrinker, consumption});
-    setTotalFootprint(Carbon.calcTotalFootprint()); 
+    setDietFootprint(Carbon.calcDietFooprint({dietChoice, coffeeDrinker, consumption}));
   }
 
 
   //Everytime state changes, recaulculate footprint
   useEffect(() => {
+
     calcAndSetFootprint();
   }, [dietChoice, coffeeDrinker, consumption])
 
@@ -123,8 +119,7 @@ export function Calculator() {
       const estimate = await ApiCarbon.postFlightInfo(inputArray);
       if (estimate){
         const {carbon_kg} = estimate.data.attributes;
-        console.log(carbon_kg)
-        Carbon.calcTravelsFootprint(Math.floor(carbon_kg));
+        setTravelsFootprint(Math.floor(carbon_kg));
         calcAndSetFootprint();
       }
     })(); 
@@ -135,10 +130,8 @@ export function Calculator() {
     (async () => {
       const estimate = await ApiCarbon.postElectricity({bedrooms, country})
       if (estimate) {
-        console.log(estimate);
         const {carbon_kg} = estimate.data.attributes;
-        console.log(carbon_kg);
-        Carbon.calcElectricityFootprint(Math.floor(carbon_kg))
+        setElectricityFootprint(Math.floor(carbon_kg))
         calcAndSetFootprint();
       }
     })();
@@ -174,11 +167,12 @@ export function Calculator() {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Link to={'/'} onClick={postFootprint} state={{totalFootprint}}>
+      <Link to={'/'} onClick={postFootprint} state={{data: {dietFootprint, travelsFootprint, electricityFootprint}}}>
         <div className='calc-button-container'>
            {showCalculate ? <Button id='calculate-button' type="primary" shape="round" size={'large'}>Calculate</Button> : null}
         </div>
       </Link>
+      <div>tot: {dietFootprint + travelsFootprint + electricityFootprint}</div>
     </motion.div>
     </>
   )

@@ -2,6 +2,7 @@ import { Button } from 'antd';
 import React, { useEffect, useState } from 'react'
 import CountUp from 'react-countup';
 import { useNavigate } from 'react-router-dom';
+import { getEnabledCategories } from 'trace_events';
 import { ApiCarbon } from '../ApiServices/ApiCarbon';
 import { ApiOffset } from '../ApiServices/ApiOffset';
 import { ApiServer } from '../ApiServices/ApiServer';
@@ -9,9 +10,11 @@ import StatisticComponent from '../components/StatisticComponent';
 import { DbDoc } from '../utils/DbDocType';
 import './Offset.css'
 
-function Offset(props: {footprint: number}) {
+function Offset(props: {footprint: {dietFootprint : number, travelsFootprint: number, electricityFootprint: number}}) {
 
-  const {footprint} = props;
+  const {dietFootprint, travelsFootprint, electricityFootprint} = props.footprint;
+  console.log(dietFootprint, travelsFootprint, electricityFootprint)
+  console.log(props.footprint)
 
   const [priceEstimate, setPriceEstimate] = useState(0);
   const [checkoutURL, setCheckoutURL] = useState('')
@@ -37,7 +40,7 @@ function Offset(props: {footprint: number}) {
   
   useEffect(() => {
     (async () => {
-      const estimate = await ApiOffset.getPrice(footprint)
+      const estimate = await ApiOffset.getPrice(dietFootprint +travelsFootprint+electricityFootprint)
       console.log(estimate);
       setPriceEstimate(estimate.priceEUR);
     })()
@@ -45,7 +48,7 @@ function Offset(props: {footprint: number}) {
 
   useEffect(() => {
     (async () => {
-      const url = await ApiOffset.getCompensate(footprint)
+      const url = await ApiOffset.getCompensate(dietFootprint +travelsFootprint+electricityFootprint)
       console.log(url)
       setCheckoutURL(url);
     })()
@@ -60,7 +63,7 @@ function Offset(props: {footprint: number}) {
         <a href={checkoutURL}><Button type="primary" shape="round" size={'large'}>Offset now</Button></a>
       </div> */}
       <div className='results-container'>
-        <StatisticComponent title={'Your carbon footprint'} value={footprint} suffix='kg' />
+        <StatisticComponent title={'Your carbon footprint'} value={dietFootprint +travelsFootprint+electricityFootprint} suffix='kg' />
         <StatisticComponent title={'Offset price estimate'} value={priceEstimate} prefix='€' /> 
       </div>
       <div className='flex-container button-container'>
