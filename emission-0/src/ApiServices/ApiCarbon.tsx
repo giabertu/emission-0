@@ -18,7 +18,7 @@ export class ApiCarbon {
   
   /*********CARBON INTERFACE CLASS MEMBERS ********/
   static CARB_INT_URL: string = 'https://www.carboninterface.com/api/v1';
-  static API_KEY: string = 'E9Q2sW86qRep6bbcc4pCA';
+  static API_KEY: string| undefined = process.env.API_KEY_CARBON;
   static HEADERS_CONFIG = {
     'Authorization' : `Bearer ${ApiCarbon.API_KEY}`,
     'Content-Type' : 'application/json',
