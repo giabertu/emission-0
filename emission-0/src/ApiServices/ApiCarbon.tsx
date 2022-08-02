@@ -18,7 +18,7 @@ export class ApiCarbon {
   
   /*********CARBON INTERFACE CLASS MEMBERS ********/
   static CARB_INT_URL: string = 'https://www.carboninterface.com/api/v1';
-  static API_KEY: string| undefined = process.env.API_KEY_CARBON;
+  static API_KEY: string | undefined = process.env.REACT_APP_API_KEY_CARBON;
   static HEADERS_CONFIG = {
     'Authorization' : `Bearer ${ApiCarbon.API_KEY}`,
     'Content-Type' : 'application/json',
@@ -34,6 +34,7 @@ export class ApiCarbon {
         legs: legsArray
       }
       console.log('Here is the data object: ', data)
+      console.log('Here is the api key: ', ApiCarbon.API_KEY)
       const postReq = await fetch(`${ApiCarbon.CARB_INT_URL}/estimates`, {
         method: 'POST',
         headers: ApiCarbon.HEADERS_CONFIG, 
@@ -46,7 +47,7 @@ export class ApiCarbon {
   /***ELECTRICITY API CALL ***/
   static async postElectricity(electricityInfo: {bedrooms: number, country: string}) {
     const {bedrooms, country} = electricityInfo;
-
+    console.log('Here is the api key: ', ApiCarbon.API_KEY)
     if (bedrooms && country) {
       let usagekWh = 0;
       switch (electricityInfo.bedrooms) {
