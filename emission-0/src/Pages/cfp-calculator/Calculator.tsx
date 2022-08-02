@@ -172,7 +172,6 @@ export function Calculator() {
            {showCalculate ? <Button id='calculate-button' type="primary" shape="round" size={'large'}>Calculate</Button> : null}
         </div>
       </Link>
-      <div>tot: {dietFootprint + travelsFootprint + electricityFootprint}</div>
     </motion.div>
     </>
   )
