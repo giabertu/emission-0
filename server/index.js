@@ -8,7 +8,10 @@ const PORT = 3005;
 
 (async () => {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/emisssion0?");
+    /*     await mongoose.connect("mongodb://127.0.0.1:27017/emisssion0?"); */
+    await mongoose.connect(
+      "mongodb+srv://jean:nova@cluster0.bfgprwu.mongodb.net/?retryWrites=true&w=majority"
+    );
     console.log("Database connection successful 🍏");
   } catch (error) {
     console.log("Database connection failed 🍎");
