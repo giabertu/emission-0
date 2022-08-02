@@ -11,8 +11,6 @@ import './Offset.css'
 function Offset(props: {footprint: {dietFootprint : number, travelsFootprint: number, electricityFootprint: number}}) {
 
   const {dietFootprint, travelsFootprint, electricityFootprint} = props.footprint;
-  console.log(dietFootprint, travelsFootprint, electricityFootprint)
-  console.log(props.footprint)
 
   const [priceEstimate, setPriceEstimate] = useState(0);
   const [checkoutURL, setCheckoutURL] = useState('')
@@ -29,13 +27,11 @@ function Offset(props: {footprint: {dietFootprint : number, travelsFootprint: nu
   }
 
   function getAverageFootprint() {
-    console.log('average footprint: ', getCalculatedSoFar() / footprintArr.length)
     return getCalculatedSoFar() / footprintArr.length;
   }
 
   function getPercentage() {
     const initialPerc = ((dietFootprint + travelsFootprint + electricityFootprint) / getAverageFootprint()) * 100;
-    console.log('Initial percentage ', initialPerc)
     if (initialPerc >= 100) {
       return ['up', Math.round(initialPerc) - 100]
     } else {
@@ -45,7 +41,6 @@ function Offset(props: {footprint: {dietFootprint : number, travelsFootprint: nu
   }
   function getPercentageValue(): number | string {
     const array = getPercentage();
-    console.log('Value: ', array[1])
     return array[1];
   }
   function getPercentageOrientation() {
@@ -105,7 +100,6 @@ function Offset(props: {footprint: {dietFootprint : number, travelsFootprint: nu
   useEffect(() => {
     (async () => {
       const footprintsArray = await ApiServer.getFootprints()
-      console.log(footprintsArray);
       setFootprintArr(footprintsArray)
     })();
   }, [])
@@ -113,7 +107,6 @@ function Offset(props: {footprint: {dietFootprint : number, travelsFootprint: nu
   useEffect(() => {
     (async () => {
       const estimate = await ApiOffset.getPrice(dietFootprint +travelsFootprint+electricityFootprint)
-      console.log(estimate);
       setPriceEstimate(estimate.priceEUR);
     })()
   }, [])
@@ -121,7 +114,6 @@ function Offset(props: {footprint: {dietFootprint : number, travelsFootprint: nu
   useEffect(() => {
     (async () => {
       const url = await ApiOffset.getCompensate(dietFootprint +travelsFootprint+electricityFootprint)
-      console.log(url)
       setCheckoutURL(url);
     })()
   }, [])

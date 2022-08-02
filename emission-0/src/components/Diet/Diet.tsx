@@ -5,10 +5,8 @@ import ConsumptionInput from '../../components/Diet/ConsumptionInput';
 import { Checkbox } from 'antd';
 import { OrbitControls } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { MeatModel } from '../../MeatModel';
-import { DietChoiceModel } from '../../OmnivoreModel';
-import { CoffeeModel } from '../../CoffeeModel';
-import { FruitBowlModel } from '../../FruitBowlModel';
+import { DietChoiceModel } from '../models/DietChoiceModel';
+import { CoffeeModel } from '../models/CoffeeModel';
 import { AnimatePresence, motion } from 'framer-motion';
 
 

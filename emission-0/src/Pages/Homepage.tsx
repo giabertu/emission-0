@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import EarthModel from '../EarthModel'
+import EarthModel from '../components/models/EarthModel'
 import './Homepage.css'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls  } from '@react-three/drei'
@@ -31,7 +31,6 @@ function Homepage() {
   useEffect(() => {
     (async () => {
       const footprintsArray = await ApiServer.getFootprints()
-      console.log(footprintsArray);
       setFootprintArr(footprintsArray)
     })();
   }, [])

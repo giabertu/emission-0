@@ -4,7 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import React, { Suspense, useEffect, useState } from 'react'
 import CountryInput from '../../components/Electricity/CountryInput';
 import HouseholdButtons from '../../components/Electricity/HouseholdButtons'
-import { LightBulbModel } from '../../LightBulbModel';
+import { LightBulbModel } from '../models/LightBulbModel';
 import './Electricity.css'
 
 function Electricity(props: {handleHouseholdButton: any, handleCountryInput: any, electricityState: {bedrooms: number}}) {

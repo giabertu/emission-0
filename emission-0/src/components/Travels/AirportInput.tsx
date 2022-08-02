@@ -15,7 +15,6 @@ function AirportInput (props: {handleRemoveFlight: any, flightInfo: FlightInfo, 
   const {handleRemoveFlight, handleInputSelect, flightInfo} = props;
   const [valueFrom, setValueFrom] = useState('');
   
-  console.log(flightInfo)
   return (
     <div className='AirportInput'>
     <AutoComplete

@@ -8,7 +8,6 @@ function DietButtons(props: { handleDietChoice: any}) {
   return (
     <Radio.Group className='radio-group' defaultValue="a" buttonStyle="solid" id='diet-choices'
     onChange={(e) => {
-      console.log(e);
       props.handleDietChoice(e)
     }}>
         <Radio.Button value="Omnivore">Omnivore</Radio.Button>

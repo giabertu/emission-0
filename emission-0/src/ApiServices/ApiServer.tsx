@@ -7,7 +7,6 @@ export class ApiServer {
   constructor() {}
 
   static async postFootprint(footprint: number) {
-    console.log(footprint)
     const res = await fetch(`${ApiServer.URL}/footprints`, {
       method: "POST",
       headers: {

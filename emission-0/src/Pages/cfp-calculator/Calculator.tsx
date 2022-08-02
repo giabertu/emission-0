@@ -1,7 +1,7 @@
 // import { Steps} from "antd";
 // import { useNavigate } from "react-router-dom"
 // import CalcNavButtons from "../../components/CalcNavButtons";
-import React, { Suspense, useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import Diet from "../../components/Diet/Diet"
 import Travels from "../../components/Travels/Travels"
 import Electricity from "../../components/Electricity/Electricity"

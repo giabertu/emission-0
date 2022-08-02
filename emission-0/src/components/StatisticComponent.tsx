@@ -7,7 +7,6 @@ import { PieChart } from 'react-minimal-pie-chart';
 function StatisticComponent(props: {title: string, value: number | string, prefix?: string, suffix?: string, className?: string,  pieChart?: boolean, data?: {title: string, value: number, color: string}[]}) {
 
   const {title, value, prefix, suffix, className, pieChart, data} = props;
-  console.log(data)
   const defaultLabelStyle = {
     fontSize: '5px',
     fontFamily: 'sans-serif',

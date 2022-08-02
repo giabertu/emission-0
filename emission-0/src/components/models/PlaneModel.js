@@ -9,7 +9,7 @@ title: Plane
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
-export default function Model({ ...props }) {
+export function PlaneModel({ ...props }) {
   const group = useRef();
   const { nodes, materials } = useGLTF("../assets/models/plane/scene.gltf");
 

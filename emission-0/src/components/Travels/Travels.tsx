@@ -1,10 +1,10 @@
-import React, { Suspense } from 'react'
+import { Suspense } from 'react'
 
 import AirportInput from '../../components/Travels/AirportInput'
 import {FlightInfo} from '../../utils/FlightInfo'
 import { OrbitControls, Plane } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import PlaneModel from '../../PlaneModel.js'
+import {PlaneModel} from '../models/PlaneModel'
 import './Travels.css'
 
 function Travels(props: {handleAddFlight: any, handleRemoveFlight: any, handleInputSelect: any, inputArray: any}) {
@@ -15,7 +15,6 @@ function Travels(props: {handleAddFlight: any, handleRemoveFlight: any, handleIn
   return (
     <div className='calculator-component'>
       <div className='calculator-html'>
-        {/* <h1>Travels</h1> */}
         <h2>Add flights you took in the past year</h2>
         <button className='calculator-button' onClick={handleAddFlight}>Add flight</button>
         {inputArray.length > 0 ? inputArray.map((flightInfo: FlightInfo) => 

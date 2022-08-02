@@ -21,10 +21,6 @@ export default function Model({ ...props }) {
 
   const { actions } = useAnimations(animations, group);
 
-  // useEffect(() => {
-  //   console.log(actions);
-  // }, []);
-
   return (
     <group ref={group} {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
