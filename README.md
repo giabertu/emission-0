@@ -1,4 +1,4 @@
-# emission-0
+# eMission 0
 
 eMission 0 is a full-stack react app that allows users to calculate their carbon emissions and offset them. It features 3D models all throughout which are fully responsive to user inputs.
 
