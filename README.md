@@ -2,6 +2,8 @@
 
 eMission 0 is a full-stack react app that allows users to calculate their carbon emissions and offset them. It features 3D models all throughout which are fully responsive to user inputs.
 
+This is the front end repository of the app. If you would like to see the backend, check out [eMission 0 Backend](https://github.com/giabertu/emission-0-server).
+
 <img width="500" alt="image" src="https://user-images.githubusercontent.com/75525883/182581487-971aba88-fbb5-48cf-9761-b491e3efca15.png">
 
 ## Get started
